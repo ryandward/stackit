@@ -5,8 +5,6 @@
 <h1 align="center">stackit</h1>
 <p align="center"><strong>The instantaneous derivative of every well plate you have ever loaded.</strong></p>
 
-> **About the author**
-> I am a database architect with about 20 years experience and a PhD in Bacteriological Genetics. By day I am the solo engineer at a genomics startup pushing 4000+ commits every six months building data GUIs to help you DNA. By night stackit is the parallel research vehicle for the same pipelines decoupled from any single tenant. It is a cross filter morphism engine I wrote because the existing tooling treats your samples like inert rows in a CSV instead of measurable objects in a metric space.
 
 ***
 
@@ -95,7 +93,7 @@ cd stackit
 python3 -m http.server 8000
 ```
 
-That is it. There is no build step. There is no install. If you cant figure this out you probably should not be cloning this repo.
+There is no install. If you cant figure this out you probably should not be cloning this repo.
 
 ## Status
 
