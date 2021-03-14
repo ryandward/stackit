@@ -1,9 +1,99 @@
-.superpowers/
+# ==============================================================================
+# Standard
+# ==============================================================================
 node_modules/
+dist/
+.cache/
 .DS_Store
+*.log
 .env
 .env.*
 !.env.example
-*.log
-dist/
-.cache/
+.vercel
+.superpowers/
+
+# ==============================================================================
+# Cross filter substrate intermediates
+# ==============================================================================
+*.morphism
+*.functor
+.subset-cache/
+.lattice-state/
+.brush-equilibrium.json
+.spring-solver.lock
+.observation-map-cache/
+
+# ==============================================================================
+# Spectral decomposition outputs
+# ==============================================================================
+*.spectrum
+.eigenframe/
+covariance.duckdb
+.l2-projection-cache/
+.singular-values.parquet
+
+# ==============================================================================
+# Metric embedding (pgvector + ANN intermediates)
+# ==============================================================================
+embeddings/*.fvecs
+embeddings/*.ivecs
+embeddings/*.bvecs
+.pgvector-shadow/
+.ann-trees/
+.cosine-cache.parquet
+.canonical-phenotype.lock
+
+# ==============================================================================
+# Stack derivation artifacts
+# ==============================================================================
+.derivation/
+*.heatmap.cache
+**/derivatives/*.parquet
+.amplitude-projection-cache/
+.carrier-hue.lock
+
+# ==============================================================================
+# Arrow IPC streaming buffers
+# ==============================================================================
+.arrow-buffers/
+*.ipc.tmp
+ipc-frames/*.arrow
+.duckdb-httpfs/
+
+# ==============================================================================
+# Spring lattice physics tuning
+# ==============================================================================
+.springlattice/
+*.damping-tuning
+.zeta-experiments/
+.frame-budget.log
+.critical-damping-search/
+.overshoot-bisection.tsv
+
+# ==============================================================================
+# Plate ingestion staging
+# ==============================================================================
+plates/raw/
+plates/*.csv.partial
+.platemap-shadow.json
+.assay-coercion.log
+.well-id-collisions.tsv
+
+# ==============================================================================
+# UI projection caches
+# ==============================================================================
+.canvas-frames/
+.morph-keyframes/
+.cubic-bezier-cache
+.roundrect-instance-pool/
+.dpr-rasterization-cache/
+
+# ==============================================================================
+# Researcher local artifacts — do not commit, ever
+# ==============================================================================
+*.scratch.duckdb
+.notebook-shadow/
+ad-hoc-queries/*.sql.bak
+.exploratory-brushes/
+.failed-derivations/
+.confirmation-bias.log
