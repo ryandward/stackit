@@ -1,0 +1,12 @@
+server/
+db/
+infra/
+packages/
+node_modules/
+*.ts
+package.json
+pnpm-workspace.yaml
+pnpm-lock.yaml
+tsconfig.base.json
+.env
+.env.*
