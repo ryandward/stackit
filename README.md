@@ -14,7 +14,7 @@ Site is live at [stackit.bio](https://stackit.bio).
 
 ## Roadmap: The Cross Filter Substrate
 
-stackit is built on the principle that data exploration is mathematically a sequence of subset morphisms. We do not present a UI. We present a projection. The interaction surface is entirely derived from the spectral decomposition of the sample similarity matrix. The frontend is irrelevant. It is a mathematically derived projection layer that syncs with the backend over Arrow IPC frames while DuckDB acts as the universal query engine. It is augmented with pgvector for high dimensional embeddings of canonical assay phenotypes and a critically damped spring lattice for the cross filter brush.
+stackit is built on the principle that data exploration is mathematically a sequence of subset morphisms. We do not present a UI. We present a projection. The interaction surface is entirely derived from the spectral decomposition of the sample similarity matrix. The frontend is irrelevant. It is a mathematically derived projection layer that syncs with the backend over Arrow IPC frames. ClickHouse is the universal query engine on the server; DuckDB-WASM consumes radix-quantized Parquet sidecars in the browser for zero-latency cross filter brushing. The whole thing is augmented with pgvector for high dimensional embeddings of canonical assay phenotypes, Apache AGE for the metadata 2-category, and a critically damped spring lattice for the cross filter brush.
 
 ### Pipeline
 
@@ -27,7 +27,7 @@ pgvector sidecar for cosine sim. canvas runs the spring solver per rAF. the form
                        ingestion + stack builder
                                   |
                                   v
-              THE CROSS FILTER SUBSTRATE (DuckDB + Arrow IPC)
+              THE CROSS FILTER SUBSTRATE (ClickHouse + Arrow IPC)
                                   |
        +--------------------------+--------------------------+
        |                          |                          |
@@ -81,6 +81,16 @@ with $h_i^{\\*}$ the equilibrium height under the current brush extent. We solve
 
 The output heatmap is not a visualization. It is the L2 projection of the surviving subset onto a single carrier hue. Variety becomes amplitude. Categorical contrast is rejected as a confound. There is exactly one channel of information and it modulates intensity only. We use this same constraint we use in our genomics platform because contrast bandwidth is conserved and decorative color robs signal.
 
+### 4. Metadata as a 2-category fibered over the tenant lattice
+
+Each customer is a fiber. Within each fiber the metadata graph is a strict 2-category. Objects are entities (User, File, Paper, Dataset, MagicLink). 1-morphisms are typed edges (`:VIEWED`, `:CITED`, `:OWNS`, `:GRANTS`). 2-morphisms are edges between predicates themselves (`:SYNONYM_OF`, `:INVERSE_OF`, `:REFINES`). Predicates are reified as `:Predicate` vertices so they compose and quotient under their own algebra:
+
+$$\mathcal{F}: \mathbf{Pred} \to \mathbf{Pred}, \quad \mathcal{F}(p_1) \xrightarrow{\text{synonym}} \mathcal{F}(p_2)$$
+
+Apache AGE stores the 2-category natively. The Postgres schema enforces tenant fibration *structurally*. `tenant_<slug>` is a Postgres schema and `tenant_<slug>_graph` is an AGE graph. A connection's `search_path` selects the fiber and no Cypher pattern can leak across. Cross-tenant access is impossible by construction, not by RLS policy.
+
+Permissions emerge as a sub-2-category over the access predicates. Recommendations are co-occurrence pattern matches over the viewing morphisms. Ontology is the transitive closure of the 2-morphism graph. None of these are features. They are projections of the same single substrate.
+
 ## Mathematically derived UI
 
 The hero animation on stackit.bio is a system of 24 instances each rendered as a single rounded rect primitive whose six parameters spring between three named keyframes. There is no React. There is no Tailwind. There is one canvas tag and a 12 second loop. The frontend design entirely avoids third party component bloat relying instead on a mathematically derived design system mapped strictly to CSS variables. If your machine cannot solve 24 simultaneous spring equations at 60Hz I do not know what to tell you.
@@ -90,11 +100,14 @@ The hero animation on stackit.bio is a system of 24 instances each rendered as a
 ```bash
 git clone https://github.com/ryandward/stackit
 cd stackit
-python3 -m http.server 8000
+docker compose -f infra/docker-compose.yml up -d
+pnpm install
+pnpm --filter @stackit/server migrate
+pnpm --filter @stackit/server dev
 ```
 
-There is no install. If you cant figure this out you probably should not be cloning this repo.
+Postgres on 54322, Apache AGE preloaded, server on 3000. If you cant figure this out you probably should not be cloning this repo.
 
 ## Status
 
-Site is live at [stackit.bio](https://stackit.bio). Implementation surface is currently one `index.html` and a single sentence on a black background. The architecture above is the strict roadmap. The placeholder is not a limitation. It is a deliberate compression. You can not even handle what is next.
+Site is live at [stackit.bio](https://stackit.bio). Implementation surface is a per-tenant Postgres + Apache AGE substrate with structural fiber isolation, a Fastify server emitting Cypher into the active fiber, and an unstyled landing page on a black background. The cross filter and recommendation strata are next. The minimalism is not a limitation. It is a deliberate compression. You can not even handle what is next.
