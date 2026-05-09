@@ -1,80 +1,127 @@
 /*
  * Tokens — raw values, intent aliases (per theme), element styles.
  *
- * Only this file contains hex / px / raw numbers.
- * Everything downstream references intent aliases.
+ * Foundation: Radix UI Colors 12-step discipline. Slate hex values
+ * (light + dark) are lifted verbatim from radix-ui/colors — they have
+ * been tonally tuned and rolling our own would be wasted work. Brand
+ * scale is anchored on stackit's #6B5BFA at step-9. Status colors are
+ * GitHub Primer's, vetted for both modes.
  *
- * Intent vocabulary is fixed: any new shade or scale stop requires
- * justifying a new alias here, not sneaking a raw value into a block.
+ * Step semantics (from Radix docs):
+ *   1   App background
+ *   2   Subtle background (panels, cards)
+ *   3   UI element background (button rest)
+ *   4   Hovered UI element background
+ *   5   Active / selected UI element background
+ *   6   Subtle border / separator
+ *   7   UI element border / focus ring
+ *   8   Hovered UI element border
+ *   9   Solid background (button fill, accent)
+ *   10  Hovered solid background
+ *   11  Low-contrast text
+ *   12  High-contrast text
  */
 
 
-/* ── Raw scale: gray (extended for 3-theme range) ── */
-
 :root {
-  --gray-0:    #ffffff;
-  --gray-50:   #fafafa;
-  --gray-100:  #f4f4f5;
-  --gray-200:  #e4e4e7;
-  --gray-300:  #d4d4d8;
-  --gray-400:  #a1a1aa;
-  --gray-500:  #71717a;
-  --gray-600:  #52525b;
-  --gray-700:  #3f3f46;
-  --gray-800:  #27272a;
-  --gray-900:  #18181b;
-  --gray-950:  #0a0a0a;
-  --gray-1000: #050505;
-  --gray-1100: #000000;
 
-  /* Brand: indigo (stackit seed = #6B5BFA) */
-  --indigo-300: #a5b4fc;
-  --indigo-400: #818cf8;
-  --indigo-500: #6366f1;
-  --indigo-600: #4f46e5;
-  --indigo-700: #4338ca;
+  /* ── Slate (neutrals) — light, verbatim from radix-ui/colors ── */
+  --slate-1:  #fcfcfd;
+  --slate-2:  #f9f9fb;
+  --slate-3:  #f0f0f3;
+  --slate-4:  #e8e8ec;
+  --slate-5:  #e0e1e6;
+  --slate-6:  #d9d9e0;
+  --slate-7:  #cdced6;
+  --slate-8:  #b9bbc6;
+  --slate-9:  #8b8d98;
+  --slate-10: #80838d;
+  --slate-11: #60646c;
+  --slate-12: #1c2024;
 
-  /* Status (single-hue per intent) */
-  --emerald-400: #34d399;
-  --emerald-500: #10b981;
-  --emerald-600: #059669;
-  --amber-400:   #fbbf24;
-  --amber-500:   #f59e0b;
-  --amber-600:   #d97706;
-  --red-400:     #f87171;
-  --red-500:     #ef4444;
-  --red-600:     #dc2626;
+  /* ── Slate dark — verbatim from radix-ui/colors ── */
+  --slate-dark-1:  #111113;
+  --slate-dark-2:  #18191b;
+  --slate-dark-3:  #212225;
+  --slate-dark-4:  #272a2d;
+  --slate-dark-5:  #2e3135;
+  --slate-dark-6:  #363a3f;
+  --slate-dark-7:  #43484e;
+  --slate-dark-8:  #5a6169;
+  --slate-dark-9:  #696e77;
+  --slate-dark-10: #777b84;
+  --slate-dark-11: #b0b4ba;
+  --slate-dark-12: #edeef0;
+
+  /* ── Brand (stackit indigo) — anchored on #6B5BFA at step-9.
+        Hand-picked along Radix's indigo-violet tonal curve. ── */
+  --brand-1:  #fdfdfe;
+  --brand-2:  #f6f7ff;
+  --brand-3:  #ecedff;
+  --brand-4:  #dee0ff;
+  --brand-5:  #cdcfff;
+  --brand-6:  #b8baff;
+  --brand-7:  #9c9efc;
+  --brand-8:  #7e7ef9;
+  --brand-9:  #6B5BFA;   /* the stackit brand */
+  --brand-10: #5447F5;
+  --brand-11: #4538d4;
+  --brand-12: #1f1582;
+
+  /* ── Brand dark ── */
+  --brand-dark-1:  #11111e;
+  --brand-dark-2:  #161528;
+  --brand-dark-3:  #221f4d;
+  --brand-dark-4:  #2a2566;
+  --brand-dark-5:  #322e7a;
+  --brand-dark-6:  #3d3a91;
+  --brand-dark-7:  #4d49ae;
+  --brand-dark-8:  #6258d6;
+  --brand-dark-9:  #6B5BFA;
+  --brand-dark-10: #8273fb;
+  --brand-dark-11: #a8a3ff;
+  --brand-dark-12: #e2deff;
+
+  /* ── Status (GitHub Primer, dual-mode vetted) ── */
+  --status-success-light: #1a7f37;
+  --status-success-dark:  #3fb950;
+  --status-warning-light: #9a6700;
+  --status-warning-dark:  #d29922;
+  --status-danger-light:  #cf222e;
+  --status-danger-dark:   #f85149;
 
 
-  /* ── Type — 6 sizes, 2 weights ── */
+  /* ── Type — Geist Variable.
+        Sizes are a dense-dashboard subset of Geist's class ramp.
+        Tracking + leading are locked per size; small text gets looser
+        tracking (caps), large text gets tighter (headings). */
 
-  --text-micro:    11px;
-  --text-fine:     13px;
-  --text-body:     14px;
-  --text-body-lg:  16px;
-  --text-heading:  22px;
-  --text-title:    32px;
-
-  --leading-none:    1;
-  --leading-tight:   1.2;
-  --leading-snug:    1.4;
-  --leading-normal:  1.5;
+  --font-sans: 'Geist Variable', 'Inter', -apple-system,
+               BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'Geist Mono Variable', ui-monospace, 'JetBrains Mono',
+               Menlo, Consolas, monospace;
 
   --weight-normal: 400;
   --weight-medium: 500;
 
-  --tracking-tight:  -0.02em;
-  --tracking-normal: -0.01em;
-  --tracking-wide:    0.04em;
+  --text-micro-size:       11px;
+  --text-micro-leading:    1.4;
+  --text-micro-track:      0.04em;
 
-  --font-sans: "Geist Variable", "Inter", system-ui, -apple-system,
-               BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-mono: "Geist Mono Variable", ui-monospace, "JetBrains Mono",
-               Menlo, Consolas, monospace;
+  --text-fine-size:        13px;
+  --text-fine-leading:     1.5;
+  --text-fine-track:       -0.005em;
+
+  --text-body-size:        14px;
+  --text-body-leading:     1.5;
+  --text-body-track:       -0.011em;
+
+  --text-heading-size:     20px;
+  --text-heading-leading:  1.2;
+  --text-heading-track:    -0.022em;
 
 
-  /* ── Space — 5 stops ── */
-
+  /* ── Spacing — 4px grid ── */
   --space-tight:   4px;
   --space-element: 8px;
   --space-inline:  12px;
@@ -82,197 +129,194 @@
   --space-section: 32px;
 
 
-  /* ── Radius — 3 stops ── */
-
-  --radius-sm:   4px;
-  --radius-md:   6px;
-  --radius-pill: 9999px;
+  /* ── Geometry — single radius, square voice ── */
+  --radius:       4px;
+  --border-width: 1px;
 
 
-  /* ── Z-index — 5 stops ── */
-
-  --z-base:   0;
-  --z-raised: 1;
-  --z-nav:    10;
-  --z-dialog: 100;
-  --z-toast:  1000;
+  /* ── Z-index — five ordinal layers ── */
+  --z-base:    0;
+  --z-raised:  1;
+  --z-nav:     2;
+  --z-overlay: 3;
+  --z-toast:   4;
 
 
   /* ── Motion ── */
-
-  --duration-fast:   120ms;
-  --duration-normal: 200ms;
-  --ease-standard:   cubic-bezier(0.4, 0, 0.2, 1);
+  --duration: 150ms;
+  --ease:     cubic-bezier(0.4, 0, 0.2, 1);
 
 
   /* ── Shell layout dimensions ── */
-
   --shell-topbar-height:    48px;
   --shell-statusbar-height: 28px;
   --shell-sidebar-width:    232px;
 }
 
 
-/* ═══════════════════════════════════════════
- * Intent aliases — Light (default)
- * ═══════════════════════════════════════════ */
+/* ─────────────────────────────────────────────────────
+ * Theme: Light — Radix step semantics over Slate light
+ * ───────────────────────────────────────────────────── */
 
 :root,
 :root[data-theme="light"] {
-  --bg:        var(--gray-0);
-  --bg-subtle: var(--gray-50);
-  --bg-muted:  var(--gray-100);
+  --bg-app:        var(--slate-1);
+  --bg-subtle:     var(--slate-2);
+  --bg-element:    var(--slate-3);
+  --bg-hover:      var(--slate-4);
+  --bg-active:     var(--slate-5);
 
-  --fg:        var(--gray-950);
-  --fg-muted:  var(--gray-600);
-  --fg-subtle: var(--gray-400);
+  --border-subtle: var(--slate-6);
+  --border:        var(--slate-7);
+  --border-hover:  var(--slate-8);
 
-  --border:        var(--gray-200);
-  --border-strong: var(--gray-300);
+  --fg-muted:      var(--slate-11);
+  --fg:            var(--slate-12);
 
-  --accent:        var(--indigo-500);
-  --accent-fg:     var(--gray-0);
-  --accent-hover:  var(--indigo-600);
-  --accent-subtle: color-mix(in srgb, var(--indigo-500) 12%, transparent);
+  --accent-bg:          var(--brand-3);
+  --accent-bg-hover:    var(--brand-4);
+  --accent-border:      var(--brand-7);
+  --accent-solid:       var(--brand-9);
+  --accent-solid-hover: var(--brand-10);
+  --accent-text:        var(--brand-11);
+  --on-accent:          #ffffff;
 
-  --success:        var(--emerald-600);
-  --success-subtle: color-mix(in srgb, var(--emerald-500) 12%, transparent);
-  --warning:        var(--amber-600);
-  --warning-subtle: color-mix(in srgb, var(--amber-500) 14%, transparent);
-  --danger:         var(--red-600);
-  --danger-subtle:  color-mix(in srgb, var(--red-500) 12%, transparent);
+  --success: var(--status-success-light);
+  --warning: var(--status-warning-light);
+  --danger:  var(--status-danger-light);
 
-  --shadow-subtle:   0 1px 2px rgb(0 0 0 / 0.04), 0 1px 1px rgb(0 0 0 / 0.06);
-  --shadow-floating: 0 8px 24px rgb(0 0 0 / 0.08), 0 2px 4px rgb(0 0 0 / 0.06);
+  --shadow-floating:
+    0 1px 1px   rgba(0, 0, 0, 0.04),
+    0 4px 8px   rgba(0, 0, 0, 0.05),
+    0 16px 32px rgba(0, 0, 0, 0.06);
 
   color-scheme: light;
 }
 
 
-/* ═══════════════════════════════════════════
- * Intent aliases — Dark
- * ═══════════════════════════════════════════ */
+/* ─────────────────────────────────────────────────────
+ * Theme: Dark — Radix step semantics over Slate dark
+ * ───────────────────────────────────────────────────── */
 
 :root[data-theme="dark"] {
-  --bg:        var(--gray-950);
-  --bg-subtle: var(--gray-900);
-  --bg-muted:  var(--gray-800);
+  --bg-app:        var(--slate-dark-1);
+  --bg-subtle:     var(--slate-dark-2);
+  --bg-element:    var(--slate-dark-3);
+  --bg-hover:      var(--slate-dark-4);
+  --bg-active:     var(--slate-dark-5);
 
-  --fg:        var(--gray-50);
-  --fg-muted:  var(--gray-400);
-  --fg-subtle: var(--gray-600);
+  --border-subtle: var(--slate-dark-6);
+  --border:        var(--slate-dark-7);
+  --border-hover:  var(--slate-dark-8);
 
-  --border:        var(--gray-800);
-  --border-strong: var(--gray-700);
+  --fg-muted:      var(--slate-dark-11);
+  --fg:            var(--slate-dark-12);
 
-  --accent:        var(--indigo-400);
-  --accent-fg:     var(--gray-950);
-  --accent-hover:  var(--indigo-300);
-  --accent-subtle: color-mix(in srgb, var(--indigo-400) 18%, transparent);
+  --accent-bg:          var(--brand-dark-3);
+  --accent-bg-hover:    var(--brand-dark-4);
+  --accent-border:      var(--brand-dark-7);
+  --accent-solid:       var(--brand-dark-9);
+  --accent-solid-hover: var(--brand-dark-10);
+  --accent-text:        var(--brand-dark-11);
+  --on-accent:          #ffffff;
 
-  --success:        var(--emerald-500);
-  --success-subtle: color-mix(in srgb, var(--emerald-500) 18%, transparent);
-  --warning:        var(--amber-500);
-  --warning-subtle: color-mix(in srgb, var(--amber-500) 18%, transparent);
-  --danger:         var(--red-500);
-  --danger-subtle:  color-mix(in srgb, var(--red-500) 18%, transparent);
+  --success: var(--status-success-dark);
+  --warning: var(--status-warning-dark);
+  --danger:  var(--status-danger-dark);
 
-  --shadow-subtle:   0 1px 2px rgb(0 0 0 / 0.4), 0 1px 1px rgb(0 0 0 / 0.5);
-  --shadow-floating: 0 8px 24px rgb(0 0 0 / 0.5), 0 2px 4px rgb(0 0 0 / 0.4);
+  --shadow-floating:
+    0 1px 1px   rgba(0, 0, 0, 0.40),
+    0 4px 8px   rgba(0, 0, 0, 0.40),
+    0 16px 32px rgba(0, 0, 0, 0.30);
 
   color-scheme: dark;
 }
 
 
-/* ═══════════════════════════════════════════
- * Intent aliases — Midnight (true black, OLED)
- * ═══════════════════════════════════════════ */
+/* ─────────────────────────────────────────────────────
+ * Theme: Midnight — pure black floor, slate-dark above
+ * ───────────────────────────────────────────────────── */
 
 :root[data-theme="midnight"] {
-  --bg:        var(--gray-1100);
-  --bg-subtle: var(--gray-1000);
-  --bg-muted:  var(--gray-950);
+  --bg-app:        #000000;
+  --bg-subtle:     var(--slate-dark-1);
+  --bg-element:    var(--slate-dark-2);
+  --bg-hover:      var(--slate-dark-3);
+  --bg-active:     var(--slate-dark-4);
 
-  --fg:        var(--gray-0);
-  --fg-muted:  var(--gray-400);
-  --fg-subtle: var(--gray-600);
+  --border-subtle: var(--slate-dark-6);
+  --border:        var(--slate-dark-7);
+  --border-hover:  var(--slate-dark-8);
 
-  --border:        var(--gray-900);
-  --border-strong: var(--gray-800);
+  --fg-muted:      var(--slate-dark-11);
+  --fg:            #ffffff;
 
-  --accent:        var(--indigo-400);
-  --accent-fg:     var(--gray-1100);
-  --accent-hover:  var(--indigo-300);
-  --accent-subtle: color-mix(in srgb, var(--indigo-400) 22%, transparent);
+  --accent-bg:          var(--brand-dark-3);
+  --accent-bg-hover:    var(--brand-dark-4);
+  --accent-border:      var(--brand-dark-7);
+  --accent-solid:       var(--brand-dark-9);
+  --accent-solid-hover: var(--brand-dark-10);
+  --accent-text:        var(--brand-dark-11);
+  --on-accent:          #ffffff;
 
-  --success:        var(--emerald-400);
-  --success-subtle: color-mix(in srgb, var(--emerald-400) 18%, transparent);
-  --warning:        var(--amber-400);
-  --warning-subtle: color-mix(in srgb, var(--amber-400) 18%, transparent);
-  --danger:         var(--red-400);
-  --danger-subtle:  color-mix(in srgb, var(--red-400) 18%, transparent);
+  --success: var(--status-success-dark);
+  --warning: var(--status-warning-dark);
+  --danger:  var(--status-danger-dark);
 
-  --shadow-subtle:   0 1px 2px rgb(0 0 0 / 0.6), 0 1px 1px rgb(0 0 0 / 0.6);
-  --shadow-floating: 0 8px 24px rgb(0 0 0 / 0.7), 0 2px 4px rgb(0 0 0 / 0.5);
+  --shadow-floating:
+    0 1px 1px   rgba(0, 0, 0, 0.60),
+    0 4px 8px   rgba(0, 0, 0, 0.60),
+    0 16px 32px rgba(0, 0, 0, 0.50);
 
   color-scheme: dark;
 }
 
 
-/* ═══════════════════════════════════════════
+/* ─────────────────────────────────────────────────────
  * Element styles — classless defaults
- * ═══════════════════════════════════════════ */
+ * ───────────────────────────────────────────────────── */
 
-html, body {
-  height: 100%;
-}
+html, body { height: 100%; }
 
 body {
-  background: var(--bg);
+  background: var(--bg-app);
   color: var(--fg);
   font-family: var(--font-sans);
-  font-size: var(--text-body);
+  font-size: var(--text-body-size);
+  line-height: var(--text-body-leading);
+  letter-spacing: var(--text-body-track);
   font-weight: var(--weight-normal);
-  line-height: var(--leading-normal);
-  letter-spacing: var(--tracking-normal);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   font-optical-sizing: auto;
   font-feature-settings: "cv11", "ss01";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3 {
-  line-height: var(--leading-tight);
+h1 {
+  font-size: var(--text-heading-size);
+  line-height: var(--text-heading-leading);
+  letter-spacing: var(--text-heading-track);
   font-weight: var(--weight-medium);
-  letter-spacing: var(--tracking-tight);
 }
 
-h1 { font-size: var(--text-title); }
-h2 { font-size: var(--text-heading); }
-h3 { font-size: var(--text-body-lg); }
+h2, h3 {
+  font-size: var(--text-body-size);
+  line-height: var(--text-body-leading);
+  letter-spacing: var(--text-body-track);
+  font-weight: var(--weight-medium);
+}
 
 code, pre, kbd, samp {
   font-family: var(--font-mono);
   font-size: 0.95em;
 }
 
-a {
-  color: var(--accent);
-}
+a            { color: var(--accent-text); text-decoration: none; }
+a:hover,
+a:focus-visible { color: var(--accent-solid); }
 
-a:hover, a:focus-visible {
-  color: var(--accent-hover);
-}
-
-::selection {
-  background: var(--accent-subtle);
-  color: var(--fg);
-}
-
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
+::selection  { background: var(--accent-solid); color: var(--on-accent); }
+:focus-visible { outline: 2px solid var(--accent-border); outline-offset: 2px; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
