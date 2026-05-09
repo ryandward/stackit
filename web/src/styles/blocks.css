@@ -1,0 +1,305 @@
+/*
+ * Blocks — component-scoped styles.
+ *
+ * Reference intent aliases only. Never raw values.
+ * No [data-*] selectors — those go in exceptions.css.
+ */
+
+
+/* ── Top Bar ── */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  padding-inline: var(--space-block);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  gap: var(--space-block);
+}
+
+.topbar__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-element);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-tight);
+  font-size: var(--text-body);
+}
+
+.topbar__brand svg {
+  width: 18px;
+  height: 18px;
+}
+
+.topbar__crumbs {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--space-element);
+  margin-inline-start: var(--space-block);
+  font-family: var(--font-mono);
+  font-size: var(--text-fine);
+  color: var(--fg-muted);
+  min-width: 0;
+}
+
+.topbar__crumb {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-tight);
+  color: var(--fg-muted);
+  white-space: nowrap;
+}
+
+.topbar__crumb__sep {
+  width: 12px;
+  height: 12px;
+  color: var(--fg-subtle);
+}
+
+
+/* ── Sidebar ── */
+
+.sidebar {
+  background: var(--bg-subtle);
+  border-right: 1px solid var(--border);
+  padding-block: var(--space-block);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar__group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-block-end: var(--space-block);
+}
+
+.sidebar__label {
+  padding-inline: var(--space-block);
+  padding-block: var(--space-tight);
+  font-size: var(--text-micro);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--fg-subtle);
+}
+
+.sidebar__link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-inline);
+  padding-block: 6px;
+  padding-inline: var(--space-block);
+  font-size: var(--text-fine);
+  color: var(--fg-muted);
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-standard),
+              color var(--duration-fast) var(--ease-standard);
+  user-select: none;
+}
+
+.sidebar__link svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar__link:hover {
+  background: var(--bg-muted);
+  color: var(--fg);
+}
+
+
+/* ── Status Bar ── */
+
+.statusbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: var(--space-block);
+  background: var(--bg-subtle);
+  border-top: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  color: var(--fg-muted);
+}
+
+.statusbar__items {
+  display: flex;
+  align-items: center;
+  gap: var(--space-block);
+}
+
+.statusbar__strong {
+  color: var(--fg);
+}
+
+
+/* ── Pane ── */
+
+.pane {
+  padding: var(--space-section);
+  max-width: 1100px;
+}
+
+.pane__title {
+  font-size: var(--text-heading);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-tight);
+  margin-block-end: var(--space-element);
+}
+
+.pane__intro {
+  color: var(--fg-muted);
+  max-width: 60ch;
+  margin-block-end: var(--space-section);
+}
+
+
+/* ── Button ── */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-tight);
+  padding: 6px var(--space-inline);
+  font-size: var(--text-fine);
+  font-weight: var(--weight-medium);
+  background: var(--bg);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-standard),
+              border-color var(--duration-fast) var(--ease-standard);
+}
+
+.button:hover {
+  background: var(--bg-muted);
+  border-color: var(--border-strong);
+}
+
+.button svg {
+  width: 14px;
+  height: 14px;
+}
+
+.button--icon {
+  padding: 6px;
+  width: 30px;
+  height: 30px;
+}
+
+
+/* ── Card ── */
+
+.card {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-block);
+}
+
+
+/* ── Pill ── */
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-tight);
+  padding: 2px 8px;
+  font-size: var(--text-micro);
+  font-weight: var(--weight-medium);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  color: var(--fg-muted);
+  background: var(--bg);
+  font-family: var(--font-mono);
+}
+
+
+/* ── Table ── */
+
+.table {
+  width: 100%;
+  font-size: var(--text-fine);
+  border-collapse: collapse;
+}
+
+.table thead th {
+  text-align: left;
+  padding: var(--space-element) var(--space-inline);
+  font-size: var(--text-micro);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  font-weight: var(--weight-medium);
+  color: var(--fg-subtle);
+  border-bottom: 1px solid var(--border);
+}
+
+.table tbody td {
+  padding: var(--space-inline);
+  border-bottom: 1px solid var(--border);
+  color: var(--fg-muted);
+}
+
+.table tbody tr:hover {
+  background: var(--bg-muted);
+}
+
+.table__name {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-element);
+  color: var(--fg);
+  font-family: var(--font-mono);
+}
+
+.table__mono {
+  font-family: var(--font-mono);
+}
+
+.table__num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* ── Dropdown (Radix DropdownMenu) ── */
+
+.dropdown__content {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-floating);
+  padding: var(--space-tight);
+  min-width: 180px;
+  z-index: var(--z-dialog);
+}
+
+.dropdown__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-inline);
+  padding: 6px var(--space-inline);
+  font-size: var(--text-fine);
+  color: var(--fg);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+}
+
+.dropdown__item svg {
+  width: 14px;
+  height: 14px;
+  color: var(--fg-muted);
+}
+
+.dropdown__item__check {
+  margin-inline-start: auto;
+  color: var(--accent) !important;
+}

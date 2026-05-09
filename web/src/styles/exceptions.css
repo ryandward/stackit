@@ -1,0 +1,68 @@
+/*
+ * Exceptions — data-attribute and aria-attribute state variations.
+ *
+ * The only place where [data-*] / [aria-*] selectors live.
+ * Reference intent aliases only.
+ */
+
+
+/* ── Sidebar link active ── */
+
+.sidebar__link[data-active="true"] {
+  background: var(--accent-subtle);
+  color: var(--fg);
+}
+
+
+/* ── Button variants ── */
+
+.button[data-variant="primary"] {
+  background: var(--accent);
+  color: var(--accent-fg);
+  border-color: var(--accent);
+}
+
+.button[data-variant="primary"]:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.button[data-variant="ghost"] {
+  background: transparent;
+  border-color: transparent;
+  color: var(--fg-muted);
+}
+
+.button[data-variant="ghost"]:hover {
+  background: var(--bg-muted);
+  color: var(--fg);
+}
+
+
+/* ── Dropdown item highlighted (Radix sets this) ── */
+
+.dropdown__item[data-highlighted] {
+  background: var(--bg-muted);
+  outline: none;
+}
+
+
+/* ── Status pill ── */
+
+.pill[data-status="success"] {
+  border-color: transparent;
+  background: var(--success-subtle);
+  color: var(--success);
+}
+
+.pill[data-status="warning"] {
+  border-color: transparent;
+  background: var(--warning-subtle);
+  color: var(--warning);
+}
+
+.pill[data-status="danger"] {
+  border-color: transparent;
+  background: var(--danger-subtle);
+  color: var(--danger);
+}

@@ -1,0 +1,71 @@
+/*
+ * Compositions — geometry only.
+ *
+ * Allowed:  display, flex, grid, gap, padding, margin, width, height,
+ *           position, align-items, justify-content, overflow.
+ * Banned:   color, background, border-color, box-shadow, font-*, opacity,
+ *           text-*, fill, stroke, raw numeric literals.
+ */
+
+
+/* ── Shell: top bar / body / status bar ── */
+
+.shell {
+  display: grid;
+  grid-template-rows: var(--shell-topbar-height) 1fr var(--shell-statusbar-height);
+  height: 100svh;
+  overflow: hidden;
+}
+
+.shell__body {
+  display: grid;
+  grid-template-columns: var(--shell-sidebar-width) 1fr;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.shell__pane {
+  overflow: auto;
+  min-height: 0;
+}
+
+
+/* ── Stack: vertical flex ── */
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-block);
+}
+
+.stack--tight  { gap: var(--space-tight); }
+.stack--inline { gap: var(--space-inline); }
+
+
+/* ── Cluster: horizontal flex with wrapping ── */
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-element);
+}
+
+
+/* ── Spread: items pushed to opposite ends ── */
+
+.spread {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-inline);
+}
+
+
+/* ── Center: row, items vertically aligned ── */
+
+.center {
+  display: flex;
+  align-items: center;
+  gap: var(--space-element);
+}
