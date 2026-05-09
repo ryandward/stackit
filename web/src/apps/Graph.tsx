@@ -7,7 +7,7 @@ export function Graph() {
         Wire to AGE next.
       </p>
       <div className="card">
-        <p className="fg-muted">Placeholder — Cypher queries against <code>tenant_&lt;slug&gt;_graph</code> render here.</p>
+        <p className="fg-muted">Placeholder. Cypher queries against <code>tenant_&lt;slug&gt;_graph</code> render here.</p>
       </div>
     </div>
   )

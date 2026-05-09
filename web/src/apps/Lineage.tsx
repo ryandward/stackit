@@ -3,10 +3,10 @@ export function Lineage() {
     <div className="pane">
       <h1 className="pane__title">Lineage</h1>
       <p className="pane__intro">
-        Provenance tree for a selected file — the <code>derived_from</code> chain back to source.
+        Provenance tree for a selected file. The <code>derived_from</code> chain back to source.
       </p>
       <div className="card">
-        <p className="fg-muted">Placeholder — recursive Cypher traversal over <code>:DERIVED_FROM</code> renders here.</p>
+        <p className="fg-muted">Placeholder. Recursive Cypher traversal over <code>:DERIVED_FROM</code> renders here.</p>
       </div>
     </div>
   )

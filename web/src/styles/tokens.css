@@ -1,10 +1,10 @@
 /*
- * Tokens — raw values, intent aliases (per theme), element styles.
+ * Tokens. Raw values, intent aliases (per theme), element styles.
  *
  * Foundation: Radix UI Colors 12-step discipline. Slate hex values
- * (light + dark) are lifted verbatim from radix-ui/colors — they have
+ * (light + dark) are lifted verbatim from radix-ui/colors. They have
  * been tonally tuned and rolling our own would be wasted work. Brand
- * scale is anchored on stackit's #6B5BFA at step-9. Status colors are
+ * scale is anchored on stackit's #6B5BFA at step 9. Status colors are
  * GitHub Primer's, vetted for both modes.
  *
  * Step semantics (from Radix docs):
@@ -25,7 +25,7 @@
 
 :root {
 
-  /* ── Slate (neutrals) — light, verbatim from radix-ui/colors ── */
+  /* Slate (neutrals), light. Verbatim from radix-ui/colors. */
   --slate-1:  #fcfcfd;
   --slate-2:  #f9f9fb;
   --slate-3:  #f0f0f3;
@@ -39,7 +39,7 @@
   --slate-11: #60646c;
   --slate-12: #1c2024;
 
-  /* ── Slate dark — verbatim from radix-ui/colors ── */
+  /* Slate dark. Verbatim from radix-ui/colors. */
   --slate-dark-1:  #111113;
   --slate-dark-2:  #18191b;
   --slate-dark-3:  #212225;
@@ -53,8 +53,11 @@
   --slate-dark-11: #b0b4ba;
   --slate-dark-12: #edeef0;
 
-  /* ── Brand (stackit indigo) — anchored on #6B5BFA at step-9.
-        Hand-picked along Radix's indigo-violet tonal curve. ── */
+  /*
+   * Brand (stackit indigo). Anchored on #6B5BFA at step 9.
+   * Steps 1 to 8 and 10 to 12 are hand-picked along Radix's
+   * indigo-violet tonal curve.
+   */
   --brand-1:  #fdfdfe;
   --brand-2:  #f6f7ff;
   --brand-3:  #ecedff;
@@ -68,7 +71,7 @@
   --brand-11: #4538d4;
   --brand-12: #1f1582;
 
-  /* ── Brand dark ── */
+  /* Brand dark. */
   --brand-dark-1:  #11111e;
   --brand-dark-2:  #161528;
   --brand-dark-3:  #221f4d;
@@ -82,7 +85,7 @@
   --brand-dark-11: #a8a3ff;
   --brand-dark-12: #e2deff;
 
-  /* ── Status (GitHub Primer, dual-mode vetted) ── */
+  /* Status. GitHub Primer, vetted for both modes. */
   --status-success-light: #1a7f37;
   --status-success-dark:  #3fb950;
   --status-warning-light: #9a6700;
@@ -91,10 +94,12 @@
   --status-danger-dark:   #f85149;
 
 
-  /* ── Type — Geist Variable.
-        Sizes are a dense-dashboard subset of Geist's class ramp.
-        Tracking + leading are locked per size; small text gets looser
-        tracking (caps), large text gets tighter (headings). */
+  /*
+   * Type. Geist Variable.
+   * Sizes are a dense-dashboard subset of Geist's class ramp.
+   * Tracking and leading are locked per size. Small text gets
+   * looser tracking (caps); large text gets tighter (headings).
+   */
 
   --font-sans: 'Geist Variable', 'Inter', -apple-system,
                BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -121,7 +126,7 @@
   --text-heading-track:    -0.022em;
 
 
-  /* ── Spacing — 4px grid ── */
+  /* Spacing. 4px grid. */
   --space-tight:   4px;
   --space-element: 8px;
   --space-inline:  12px;
@@ -129,12 +134,12 @@
   --space-section: 32px;
 
 
-  /* ── Geometry — single radius, square voice ── */
+  /* Geometry. Single radius, square voice. */
   --radius:       4px;
   --border-width: 1px;
 
 
-  /* ── Z-index — five ordinal layers ── */
+  /* Z-index. Five ordinal layers. */
   --z-base:    0;
   --z-raised:  1;
   --z-nav:     2;
@@ -142,21 +147,19 @@
   --z-toast:   4;
 
 
-  /* ── Motion ── */
+  /* Motion. */
   --duration: 150ms;
   --ease:     cubic-bezier(0.4, 0, 0.2, 1);
 
 
-  /* ── Shell layout dimensions ── */
+  /* Shell layout dimensions. */
   --shell-topbar-height:    48px;
   --shell-statusbar-height: 28px;
   --shell-sidebar-width:    232px;
 }
 
 
-/* ─────────────────────────────────────────────────────
- * Theme: Light — Radix step semantics over Slate light
- * ───────────────────────────────────────────────────── */
+/* Theme: Light. Radix step semantics over Slate light. */
 
 :root,
 :root[data-theme="light"] {
@@ -194,9 +197,7 @@
 }
 
 
-/* ─────────────────────────────────────────────────────
- * Theme: Dark — Radix step semantics over Slate dark
- * ───────────────────────────────────────────────────── */
+/* Theme: Dark. Radix step semantics over Slate dark. */
 
 :root[data-theme="dark"] {
   --bg-app:        var(--slate-dark-1);
@@ -233,9 +234,7 @@
 }
 
 
-/* ─────────────────────────────────────────────────────
- * Theme: Midnight — pure black floor, slate-dark above
- * ───────────────────────────────────────────────────── */
+/* Theme: Midnight. Pure black floor, slate-dark above. */
 
 :root[data-theme="midnight"] {
   --bg-app:        #000000;
@@ -272,9 +271,7 @@
 }
 
 
-/* ─────────────────────────────────────────────────────
- * Element styles — classless defaults
- * ───────────────────────────────────────────────────── */
+/* Element styles. Classless defaults. */
 
 html, body { height: 100%; }
 

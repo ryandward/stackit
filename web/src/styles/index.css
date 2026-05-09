@@ -1,12 +1,12 @@
 /*
  * E2P-style CUBE.CSS architecture.
  *
- * reset        — browser normalization
- * tokens       — raw values, intent aliases, element styles, themes
- * compositions — layout geometry only
- * blocks       — component-scoped styles
- * utilities    — single-purpose intent appliers
- * exceptions   — data-attribute / aria state variations
+ * reset        : browser normalization
+ * tokens       : raw values, intent aliases, element styles, themes
+ * compositions : layout geometry only
+ * blocks       : component-scoped styles
+ * utilities    : single-purpose intent appliers
+ * exceptions   : data-attribute / aria state variations
  */
 
 @layer reset, tokens, compositions, blocks, utilities, exceptions;

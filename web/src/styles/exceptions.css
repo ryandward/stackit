@@ -1,10 +1,10 @@
 /*
- * Exceptions — data-attribute and aria-attribute state variations.
+ * Exceptions. Data-attribute and aria-attribute state variations.
  * The only place where [data-*] / [aria-*] selectors live.
  */
 
 
-/* ── Sidebar link active ── */
+/* Sidebar link active */
 
 .sidebar__link[data-active="true"] {
   background: var(--accent-bg);
@@ -16,7 +16,7 @@
 }
 
 
-/* ── Button: primary variant ── */
+/* Button: primary variant */
 
 .button[data-variant="primary"] {
   background: var(--accent-solid);
@@ -30,7 +30,7 @@
 }
 
 
-/* ── Button: ghost variant ── */
+/* Button: ghost variant */
 
 .button[data-variant="ghost"] {
   background: transparent;
@@ -45,7 +45,7 @@
 }
 
 
-/* ── Dropdown item highlighted (Radix sets this) ── */
+/* Dropdown item highlighted (Radix sets this) */
 
 .dropdown__item[data-highlighted] {
   background: var(--bg-hover);
@@ -53,9 +53,10 @@
 }
 
 
-/* ── Ledger row status ──
- * Status colour appears ONLY on the 6×6 dot, never as a fill or wash.
- * Revoked rows additionally dim to fg-muted; the dot becomes a 1px ring.
+/*
+ * Ledger row status. Status colour appears only on the 6x6 dot,
+ * never as a fill or wash. Revoked rows additionally dim to fg-muted;
+ * the dot becomes a 1px ring.
  */
 
 .ledger tr[data-status="active"]   .ledger__dot { background: var(--success); }

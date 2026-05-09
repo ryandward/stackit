@@ -9,7 +9,7 @@ export async function cypher<T = unknown>(
   params?: Record<string, unknown>,
 ): Promise<T[]> {
   // AGE requires graph_name and the cypher query to be SQL literals at parse
-  // time — they can't be bound parameters. We inline both, and pass the
+  // time. They can't be bound parameters. We inline both, and pass the
   // optional params map as a single agtype-cast JSON bind.
   if (!GRAPH_RE.test(graph)) {
     throw new Error(`invalid graph name: ${graph}`)

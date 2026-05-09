@@ -1,5 +1,5 @@
 /*
- * Compositions — geometry only.
+ * Compositions. Geometry only.
  *
  * Allowed:  display, flex, grid, gap, padding, margin, width, height,
  *           position, align-items, justify-content, overflow.
@@ -8,7 +8,7 @@
  */
 
 
-/* ── Shell: top bar / body / status bar ── */
+/* Shell: top bar, body, status bar */
 
 .shell {
   display: grid;
@@ -30,7 +30,7 @@
 }
 
 
-/* ── Stack: vertical flex ── */
+/* Stack: vertical flex */
 
 .stack {
   display: flex;
@@ -42,7 +42,7 @@
 .stack--inline { gap: var(--space-inline); }
 
 
-/* ── Cluster: horizontal flex with wrapping ── */
+/* Cluster: horizontal flex with wrapping */
 
 .cluster {
   display: flex;
@@ -52,7 +52,7 @@
 }
 
 
-/* ── Spread: items pushed to opposite ends ── */
+/* Spread: items pushed to opposite ends */
 
 .spread {
   display: flex;
@@ -62,7 +62,7 @@
 }
 
 
-/* ── Center: row, items vertically aligned ── */
+/* Center: row, items vertically aligned */
 
 .center {
   display: flex;

@@ -1,10 +1,10 @@
 /*
- * Blocks — component-scoped styles.
+ * Blocks. Component-scoped styles.
  * Reference intent aliases only. No raw values.
  */
 
 
-/* ── Top Bar ── */
+/* Top Bar */
 
 .topbar {
   display: flex;
@@ -56,7 +56,7 @@
 }
 
 
-/* ── Sidebar ── */
+/* Sidebar */
 
 .sidebar {
   background: var(--bg-subtle);
@@ -110,7 +110,7 @@
 }
 
 
-/* ── Status Bar ── */
+/* Status Bar */
 
 .statusbar {
   display: flex;
@@ -135,7 +135,7 @@
 }
 
 
-/* ── Pane (main content area) ── */
+/* Pane (main content area) */
 
 .pane {
   padding: var(--space-section);
@@ -161,7 +161,7 @@
 }
 
 
-/* ── Button ── */
+/* Button */
 
 .button {
   display: inline-flex;
@@ -198,7 +198,7 @@
 }
 
 
-/* ── Card ── */
+/* Card */
 
 .card {
   background: var(--bg-subtle);
@@ -208,7 +208,7 @@
 }
 
 
-/* ── Tenant tag (topbar) ── plain mono text, no chrome ── */
+/* Tenant tag (topbar). Plain mono text, no chrome. */
 
 .tenant-tag {
   font-family: var(--font-mono);
@@ -218,7 +218,7 @@
 }
 
 
-/* ── Ledger (Sharing-style data table) ── */
+/* Ledger (Sharing-style data table) */
 
 .ledger {
   width: 100%;
@@ -297,7 +297,7 @@
 }
 
 
-/* ── Files list (file-manager style) ── */
+/* Files list (file-manager style) */
 
 .files {
   width: 100%;
@@ -351,7 +351,7 @@
 }
 
 
-/* ── Dropdown (Radix DropdownMenu) ── */
+/* Dropdown (Radix DropdownMenu) */
 
 .dropdown__content {
   background: var(--bg-subtle);
