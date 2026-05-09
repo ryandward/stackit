@@ -8,92 +8,57 @@
 
 ***
 
-[stackit](https://stackit.bio) is a high throughput cross filter substrate for assay data. Plate goes in. Brush goes across. Heatmap comes out. Everything in between is a sequence of functorial selections over a category of measurable subsets. You will not encounter a spinner.
+[stackit](https://stackit.bio) is sensitive-data infrastructure for genomics. HIPAA-grade audit, sovereign deployment, no AWS, no big-tech cloud SaaS. Built for hospitals, research universities, and tribal nations who can't (or won't) put genome-scale datasets in someone else's cloud.
 
 Site is live at [stackit.bio](https://stackit.bio).
 
-## Roadmap: The Cross Filter Substrate
+## Architecture
 
-stackit is built on the principle that data exploration is mathematically a sequence of subset morphisms. We do not present a UI. We present a projection. The interaction surface is entirely derived from the spectral decomposition of the sample similarity matrix. The frontend is irrelevant. It is a mathematically derived projection layer that syncs with the backend over Arrow IPC frames. ClickHouse is the universal query engine on the server; DuckDB-WASM consumes radix-quantized Parquet sidecars in the browser for zero-latency cross filter brushing. The whole thing is augmented with pgvector for high dimensional embeddings of canonical assay phenotypes, Apache AGE for the metadata 2-category, and a critically damped spring lattice for the cross filter brush.
+stackit is two substrates solving two genuinely different problems.
 
-### Pipeline
+**Metadata substrate.** A labeled property graph stored in Apache AGE inside Postgres. Users, datasets, papers, citations, sharing grants, viewing events, ontology relations are vertices and edges with properties. Same model Meta's TAO uses, same model Neo4j uses. Not a triple store. A property graph. Each customer gets their own Postgres schema and their own AGE graph. Cross-tenant access is impossible by construction, not by RLS policy.
 
-pgvector sidecar for cosine sim. canvas runs the spring solver per rAF. the formal treatment is below.
+**Analytics substrate.** ClickHouse for the billions-of-rows assay and plate data the metadata graph would never want to hold. Apache Arrow for IPC between the server and the cross-filter UI. Spectacle compiles a closed-algebra source expression into SQL, ClickHouse executes, the canvas renders. (Roadmap. See below.)
+
+The two don't overlap. One handles networks of relationships. The other handles dense tabular numerics.
+
+## Data flow (current)
 
 ```text
-   plate layout, assay telemetry, sample annotation graph
+client (web)
+   |
+   v
+fastify  -- per-request connection, search_path = tenant_<slug>
+   |
+   +-------------------------+--------------------------+
+   |                         |                          |
+   v                         v                          v
+public.tenants     tenant_<slug>.users         tenant_<slug>_graph
+public.provision   tenant_<slug>.institutions
+   _tenant()
+                              (:User {id})
                                   |
+                                  | :AFFILIATED_WITH
+                                  | { role, degree,
+                                  |   start_year, end_year }
                                   v
-                       ingestion + stack builder
-                                  |
-                                  v
-              THE CROSS FILTER SUBSTRATE (ClickHouse + Arrow IPC)
-                                  |
-       +--------------------------+--------------------------+
-       |                          |                          |
-       v                          v                          v
-
-   subset morphisms       spring lattice solver       metric embedder
-   (categorical)          (critically damped)         (pgvector)
-
-   brush selections       inhomogeneous wave eq.      per feature L2 norm
-   modeled as functors    on bin height field         approximate nearest
-   on powerset 2^Ω        solved per frame 60Hz       neighbor on samples
-
-       |                          |                          |
-       +--------------------------+--------------------------+
-                                  |
-                                  v
-                  brushed histogram lattice  -->  heatmap projection map
-
-                  B_H : 2^Ω -> 2^Ω,    B_H(S) = { ω ∈ S : φ_H(ω) ∈ I }
-                  the brush is the selector functor on the powerset of samples
-                                  |
-                                  v
-              mathematically derived heatmap  <-->  spring animated UI
+                              (:Institution {id})
 ```
 
-### 1. The brush is a morphism not a UI element
+Entity rows in Postgres carry intrinsic data: email, password hash, file size, blob URI. Vertices in the AGE graph share the entity row's primary key as their `id` property. One logical thing, one ID. Cypher returns `(:User {id: 1})`. The application then SELECTs the full row from `users` by id when it needs more than the connections.
 
-When you drag a rectangular selection across the first histogram in stackit you are not interacting with a chart. You are emitting a functor on the powerset of samples. Every other histogram in the cross filter lattice is the image of that functor under its own observation map. The spring physics is the damped recovery of the metric embedding back to the new equilibrium. Formally:
+## Components
 
-$$B_{H_1}: 2^{\Omega} \to 2^{\Omega}, \quad B_{H_1}(S) = \\{ \omega \in S \mid \varphi_{H_1}(\omega) \in I \\}$$
+```
+stackit/
+  server/    TypeScript + Fastify + raw pg, per-request connection lifecycle
+  web/       Vite + React 19, CUBE.CSS layers, Geist Variable, three themes
+  db/        SQL migrations + a small runner
+  infra/     Docker Compose (Postgres 16 + AGE 1.6.0)
+  packages/  future home for vendored Spectacle
+```
 
-The point is your filter selection commutes with every observation map. So you do not compute. You select. The lattice does the rest.
-
-> Drop the brush. The bars settle. You see the pattern.
-
-You know this because the projection updates synchronously with the brush extent. See, the surviving subset under the brush is the limit of a sequence of functorial restrictions and the heatmap is the L2 projection of that limit onto a single carrier hue. Stackit traverses the sample annotation graph and computes the cosine similarity of every surviving sample weighted by the spectral decomposition of the assay covariance:
-
-$$\text{sim}(s_i, s_j) = \frac{\langle \mathbf{v}_i, \mathbf{v}_j \rangle}{\\|\mathbf{v}_i\\| \\|\mathbf{v}_j\\|} \otimes \mathcal{H}(\Sigma)$$
-
-When the brush moves the substrate recomputes the limit and emits an Arrow IPC delta to the client. The nearest neighbor algorithm proves your survivor set bridges the gap to the canonical phenotype so the heatmap literally tells you which wells to follow up on next plate.
-
-### 2. Spring animated cross filter as an inhomogeneous wave equation
-
-The bars in stackit do not tween. Each bin height $h_i(t)$ obeys:
-
-$$\ddot{h}_i + 2\zeta\omega_n \dot{h}_i + \omega_n^2 (h_i - h_i^{\\*}) = 0$$
-
-with $h_i^{\\*}$ the equilibrium height under the current brush extent. We solve it semi implicitly per frame at 60Hz. The damping ratio is 0.78 because anything tighter feels mechanical and anything looser feels uncertain. The result is that your filter is not a click event it is a continuous physical perturbation of the metric embedding and your eye reads it as such.
-
-### 3. Heatmap as a single hue amplitude projection
-
-The output heatmap is not a visualization. It is the L2 projection of the surviving subset onto a single carrier hue. Variety becomes amplitude. Categorical contrast is rejected as a confound. There is exactly one channel of information and it modulates intensity only. We use this same constraint we use in our genomics platform because contrast bandwidth is conserved and decorative color robs signal.
-
-### 4. Metadata as a 2-category fibered over the tenant lattice
-
-Each customer is a fiber. Within each fiber the metadata graph is a strict 2-category. Objects are entities (User, File, Paper, Dataset, MagicLink). 1-morphisms are typed edges (`:VIEWED`, `:CITED`, `:OWNS`, `:GRANTS`). 2-morphisms are edges between predicates themselves (`:SYNONYM_OF`, `:INVERSE_OF`, `:REFINES`). Predicates are reified as `:Predicate` vertices so they compose and quotient under their own algebra:
-
-$$\mathcal{F}: \mathbf{Pred} \to \mathbf{Pred}, \quad \mathcal{F}(p_1) \xrightarrow{\text{synonym}} \mathcal{F}(p_2)$$
-
-Apache AGE stores the 2-category natively. The Postgres schema enforces tenant fibration *structurally*. `tenant_<slug>` is a Postgres schema and `tenant_<slug>_graph` is an AGE graph. A connection's `search_path` selects the fiber and no Cypher pattern can leak across. Cross-tenant access is impossible by construction, not by RLS policy.
-
-Permissions emerge as a sub-2-category over the access predicates. Recommendations are co-occurrence pattern matches over the viewing morphisms. Ontology is the transitive closure of the 2-morphism graph. None of these are features. They are projections of the same single substrate.
-
-## Mathematically derived UI
-
-The hero animation on stackit.bio is a system of 24 instances each rendered as a single rounded rect primitive whose six parameters spring between three named keyframes. There is no React. There is no Tailwind. There is one canvas tag and a 12 second loop. The frontend design entirely avoids third party component bloat relying instead on a mathematically derived design system mapped strictly to CSS variables. If your machine cannot solve 24 simultaneous spring equations at 60Hz I do not know what to tell you.
+The frontend design system is grounded. Radix Slate (light + dark) is lifted verbatim for neutrals. A bespoke brand scale is anchored on `#6B5BFA` at step 9 along Radix's indigo-violet tonal curve. Status colours come from GitHub Primer (vetted for both modes). Geist Sans + Geist Mono. Single radius (4px). Five spacing stops, ordinal z-layers, one motion duration. Three themes: light, dark, midnight.
 
 ## Execution
 
@@ -103,11 +68,38 @@ cd stackit
 docker compose -f infra/docker-compose.yml up -d
 pnpm install
 pnpm --filter @stackit/server migrate
-pnpm --filter @stackit/server dev
+pnpm --filter @stackit/server dev    # API on :3000
+pnpm --filter @stackit/web    dev    # UI on :5173
 ```
 
-Postgres on 54322, Apache AGE preloaded, server on 3000. If you cant figure this out you probably should not be cloning this repo.
+Postgres listens on host port 54322. Apache AGE 1.6.0 is preloaded. If you cant figure this out you probably should not be cloning this repo.
+
+## Roadmap
+
+The layers below are not yet built.
+
+### Vendored Spectacle
+
+Stackit's visualization compiler ports from a prior project. Takes a closed 8-atom Codd-style source algebra (`table`, `values`, `filter`, `project`, `extend`, `aggregate`, `join`, `slice`), emits SQL for ClickHouse, returns Arrow IPC frames that drive a canvas2d cross-filter. The two-algebra split (source algebra inner, visual encoding outer) is the architectural distinguishing feature. It propagates functional dependencies through every rewrite so pivot operations are statically validated against the live grain.
+
+### Append-only event log
+
+Per-tenant `events` table. INSERT and SELECT only on the application role. No UPDATE, no DELETE, defended both by grant and by trigger. Catches every read, write, share, login, file open. Audit-grade by construction. The graph carries derived summary edges (first_at, last_at, count) for traversable queries; the event log remains the source of truth.
+
+### Magic-link sharing
+
+Short-lived tokens that grant access to a specific resource. Modeled as `:MagicLink` vertices with `:GRANTS_ACCESS_TO`, `:OPENED_BY`, `:CREATED_BY` edges. Permission resolution becomes a Cypher pattern over those edges. Cross-org sharing rides the same pattern.
+
+### pgvector for content similarity
+
+Embed each paper, dataset, file into a high-dimensional vector. Combine with property-graph traversal in the same query for two-tower-style "more like this" recommendations: graph for structural co-occurrence, vector for content similarity, blended score.
+
+### ClickHouse analytics layer
+
+The billions-of-rows substrate Spectacle targets. Server-side. Arrow IPC out. Replaces DuckDB-server in earlier framings; DuckDB-WASM may consume radix-quantized parquet sidecars in the browser for zero-latency cross-filter brushing.
 
 ## Status
 
-Site is live at [stackit.bio](https://stackit.bio). Implementation surface is a per-tenant Postgres + Apache AGE substrate with structural fiber isolation, a Fastify server emitting Cypher into the active fiber, and an unstyled landing page on a black background. The cross filter and recommendation strata are next. The minimalism is not a limitation. It is a deliberate compression. You can not even handle what is next.
+Substrate in. Per-tenant Postgres + AGE isolation, entity-vertex bridge with shared IDs, first edge type live (`:AFFILIATED_WITH` with role / degree / start_year / end_year on the edge). Web UI scaffolds five app stubs (Files, Graph, Lineage, Sharing, View) with the constrained design system and three-mode theme switcher (light, dark, midnight) live.
+
+You can not even handle what is next.
