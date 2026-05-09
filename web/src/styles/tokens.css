@@ -307,15 +307,17 @@ code, pre, kbd, samp {
   font-family: var(--font-mono);
 }
 
-/* Inline code chip. Block code (inside <pre>) opts out. */
+/* Inline code chip. Block code (inside <pre>) opts out.
+   margin-inline guarantees breathing room even when JSX collapses
+   adjacent whitespace; em-based so it scales with the font. */
 :not(pre) > code {
   display: inline-block;
   background: var(--bg-element);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius);
-  padding: 0 5px;
-  margin-inline: 2px;
-  font-size: 0.92em;
+  padding: 0 0.4em;
+  margin-inline: 0.25em;
+  font-size: 0.9em;
   line-height: 1.5;
   color: var(--fg);
   vertical-align: baseline;

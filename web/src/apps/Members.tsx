@@ -47,9 +47,9 @@ export function Members() {
     <div className="pane">
       <h1 className="pane__title">Members</h1>
       <p className="pane__intro">
-        People in the demo tenant and their affiliations. Each row pulls intrinsic
-        user data from the tenant's Postgres schema and joins to <code>:AFFILIATED_WITH</code>
-        edges in the tenant's AGE graph.
+        People in the demo tenant and their affiliations. Each row pulls
+        intrinsic user data from the tenant's Postgres schema and joins
+        to <code>:AFFILIATED_WITH</code> edges in the tenant's AGE graph.
       </p>
       <table className="ledger">
         <thead>
