@@ -105,6 +105,91 @@ export async function addAffiliation(
   })
 }
 
+export type Member = {
+  id: number
+  email: string
+  displayName: string | null
+  affiliations: Affiliation[]
+}
+
+export async function listMembers(tenantSlug: string): Promise<Member[]> {
+  return await withTenant(tenantSlug, async ({ client, graph }) => {
+    const users = await client.query<{
+      id: string
+      email: string
+      display_name: string | null
+    }>(`SELECT id, email, display_name FROM users ORDER BY id`)
+
+    if (users.rows.length === 0) return []
+
+    type EdgeRow = {
+      user_id: number
+      institution_id: number
+      role: string
+      degree: string | null
+      start_year: number | null
+      end_year: number | null
+    }
+    const edges = await cypher<EdgeRow>(
+      client,
+      graph,
+      `
+        MATCH (u:User)-[a:AFFILIATED_WITH]->(i:Institution)
+        RETURN {
+          user_id:        u.id,
+          institution_id: i.id,
+          role:           a.role,
+          degree:         a.degree,
+          start_year:     a.start_year,
+          end_year:       a.end_year
+        }
+      `,
+    )
+
+    const instIds = [...new Set(edges.map(e => e.institution_id))]
+    const insts =
+      instIds.length === 0
+        ? { rows: [] as Array<{ id: string; name: string; kind: InstitutionKind; country: string | null }> }
+        : await client.query<{
+            id: string
+            name: string
+            kind: InstitutionKind
+            country: string | null
+          }>(
+            `SELECT id, name, kind, country FROM institutions WHERE id = ANY($1::bigint[])`,
+            [instIds],
+          )
+    const instMap = new Map(
+      insts.rows.map(i => [
+        Number(i.id),
+        { id: Number(i.id), name: i.name, kind: i.kind, country: i.country },
+      ]),
+    )
+
+    const affsByUser = new Map<number, Affiliation[]>()
+    for (const e of edges) {
+      const inst = instMap.get(e.institution_id)
+      if (!inst) continue
+      const list = affsByUser.get(e.user_id) ?? []
+      list.push({
+        institution: inst,
+        role: e.role,
+        degree: e.degree,
+        start_year: e.start_year,
+        end_year: e.end_year,
+      })
+      affsByUser.set(e.user_id, list)
+    }
+
+    return users.rows.map(u => ({
+      id: Number(u.id),
+      email: u.email,
+      displayName: u.display_name,
+      affiliations: affsByUser.get(Number(u.id)) ?? [],
+    }))
+  })
+}
+
 export async function getAffiliations(
   tenantSlug: string,
   userId: number,

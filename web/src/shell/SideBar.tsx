@@ -32,7 +32,7 @@ const groups: Group[] = [
   {
     label: 'Tenant',
     items: [
-      { id: 't-members',  name: 'Members',  Icon: Users },
+      { id: 't-members',  name: 'Members',  Icon: Users,    app: 'members' },
       { id: 't-settings', name: 'Settings', Icon: Settings },
     ],
   },

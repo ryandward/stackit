@@ -8,6 +8,7 @@ import { Graph } from './apps/Graph'
 import { Lineage } from './apps/Lineage'
 import { Sharing } from './apps/Sharing'
 import { View } from './apps/View'
+import { Members } from './apps/Members'
 import type { AppId } from './types'
 
 const APPS = {
@@ -16,6 +17,7 @@ const APPS = {
   lineage: Lineage,
   sharing: Sharing,
   view:    View,
+  members: Members,
 } as const
 
 const TITLES: Record<AppId, string> = {
@@ -24,6 +26,7 @@ const TITLES: Record<AppId, string> = {
   lineage: 'Lineage',
   sharing: 'Sharing',
   view:    'View',
+  members: 'Members',
 }
 
 export function App() {

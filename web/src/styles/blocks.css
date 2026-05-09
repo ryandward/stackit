@@ -297,6 +297,30 @@
 }
 
 
+/* Affiliations (rendered inside a Members row) */
+
+.affiliations {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.affiliation {
+  font-size: var(--text-fine-size);
+  letter-spacing: var(--text-fine-track);
+  white-space: nowrap;
+}
+
+.affiliation__name {
+  color: var(--fg);
+}
+
+.affiliation__qualifiers {
+  color: var(--fg-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+
 /* Files list (file-manager style) */
 
 .files {

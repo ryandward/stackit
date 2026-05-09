@@ -7,6 +7,7 @@ import {
   createInstitution,
   addAffiliation,
   getAffiliations,
+  listMembers,
   type InstitutionKind,
 } from './entities.js'
 
@@ -85,6 +86,14 @@ app.get<{
   const { slug, userId } = req.params
   return await getAffiliations(slug, Number(userId))
 })
+
+app.get<{ Params: { slug: string } }>(
+  '/tenants/:slug/members',
+  async (req) => {
+    const { slug } = req.params
+    return await listMembers(slug)
+  },
+)
 
 const port = Number(process.env.PORT ?? 3000)
 app
