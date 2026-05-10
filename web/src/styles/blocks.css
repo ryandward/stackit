@@ -97,8 +97,8 @@
   user-select: none;
   transform: scale(1);
   will-change: transform;
-  transition: background var(--duration) var(--ease),
-              color var(--duration) var(--ease),
+  transition: background var(--duration-base) var(--ease),
+              color var(--duration-base) var(--ease),
               transform var(--duration-spring) var(--ease-overshoot);
 }
 
@@ -113,7 +113,17 @@
   color: var(--fg);
 }
 
-.sidebar__link:active {
+/*
+ * Tappable press response. Cross-component click feedback.
+ * Press: fast linear snap to scale-pressed.
+ * Release: spring back through each block's default transition,
+ *          which carries transform under the overshoot ease.
+ */
+.sidebar__link:active,
+.button:active,
+.dropdown__item:active,
+.ledger tbody tr:active,
+.files tbody tr:active {
   transform: scale(var(--scale-pressed));
   transition: transform var(--duration-fast) var(--ease);
 }
@@ -177,7 +187,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-tight);
-  padding: 6px var(--space-inline);
+  padding: var(--space-element) var(--space-inline);
   font-size: var(--text-fine-size);
   font-weight: var(--weight-medium);
   letter-spacing: var(--text-fine-track);
@@ -186,8 +196,11 @@
   border: var(--border-width) solid var(--border-subtle);
   border-radius: var(--radius);
   cursor: pointer;
-  transition: background var(--duration) var(--ease),
-              border-color var(--duration) var(--ease);
+  transform: scale(1);
+  will-change: transform;
+  transition: background var(--duration-base) var(--ease),
+              border-color var(--duration-base) var(--ease),
+              transform var(--duration-spring) var(--ease-overshoot);
 }
 
 .button:hover {
@@ -258,13 +271,19 @@
 
 .ledger tbody tr,
 .files tbody tr {
-  transition: background var(--duration-spring) var(--ease-spring);
+  transform: scale(1);
+  transition: background var(--duration-spring) var(--ease-spring),
+              transform  var(--duration-spring) var(--ease-overshoot);
 }
 
 .ledger tbody tr:hover,
-.files tbody tr:hover {
+.ledger tbody tr:focus-visible,
+.files tbody tr:hover,
+.files tbody tr:focus-visible {
   background: var(--bg-hover);
-  transition: background var(--duration-instant);
+  will-change: transform;
+  transition: background var(--duration-instant),
+              transform  var(--duration-spring) var(--ease-overshoot);
 }
 
 .ledger__token {
@@ -381,6 +400,9 @@
   cursor: pointer;
   outline: none;
   user-select: none;
+  transform: scale(1);
+  will-change: transform;
+  transition: transform var(--duration-spring) var(--ease-overshoot);
 }
 
 .dropdown__item svg {
