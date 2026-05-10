@@ -109,34 +109,35 @@
   --weight-normal: 400;
   --weight-medium: 500;
 
-  --text-micro-size:       11px;
+  --text-micro-size:       0.6875rem;  /* 11px */
   --text-micro-leading:    1.4;
   --text-micro-track:      0.04em;
 
-  --text-fine-size:        13px;
+  --text-fine-size:        0.8125rem;  /* 13px */
   --text-fine-leading:     1.5;
   --text-fine-track:       -0.005em;
 
-  --text-body-size:        14px;
+  --text-body-size:        0.875rem;   /* 14px */
   --text-body-leading:     1.5;
   --text-body-track:       -0.011em;
 
-  --text-heading-size:     20px;
+  --text-heading-size:     1.25rem;    /* 20px */
   --text-heading-leading:  1.2;
   --text-heading-track:    -0.022em;
 
 
-  /* Spacing. 4px grid. */
-  --space-tight:   4px;
-  --space-element: 8px;
-  --space-inline:  12px;
-  --space-block:   16px;
-  --space-section: 32px;
+  /* Spacing. 2px grid in rem, OLAP-density. */
+  --space-nano:    0.125rem;   /* 2px */
+  --space-tight:   0.25rem;    /* 4px */
+  --space-element: 0.375rem;   /* 6px */
+  --space-inline:  0.5rem;     /* 8px */
+  --space-block:   0.75rem;    /* 12px */
+  --space-section: 1.5rem;     /* 24px */
 
 
   /* Geometry. Single radius, square voice. */
-  --radius:       4px;
-  --border-width: 1px;
+  --radius:       0.25rem;     /* 4px */
+  --border-width: 0.0625rem;   /* 1px hairline */
 
 
   /* Z-index. Five ordinal layers. */
@@ -147,15 +148,29 @@
   --z-toast:   4;
 
 
-  /* Motion. */
-  --duration: 150ms;
-  --ease:     cubic-bezier(0.4, 0, 0.2, 1);
+  /* Motion. Material baseline plus critically damped spring (zeta=0.78). */
+  --duration:         150ms;
+  --ease:             cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-instant: 0s;
+  --duration-fast:    100ms;
+  --duration-spring:  250ms;
+  --ease-spring:      cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-overshoot:   cubic-bezier(0.34, 1.56, 0.64, 1);
+  --scale-pressed:    0.98;
 
 
-  /* Shell layout dimensions. */
-  --shell-topbar-height:    48px;
-  --shell-statusbar-height: 28px;
-  --shell-sidebar-width:    232px;
+  /*
+   * Shell layout. Bar heights are rem so they scale with the user's
+   * text-size preference rather than the viewport. Sidebar width is
+   * a viewport-aware clamp: the floor keeps the longest nav label at
+   * fine mono from wrapping (icon + gap + 2x block padding included);
+   * the ideal tracks viewport so dense displays get more chrome and
+   * cramped displays surrender it; the cap prevents over-claim on
+   * ultra-wide where the ideal would balloon past the chrome's role.
+   */
+  --shell-topbar-height:    2.5rem;
+  --shell-statusbar-height: 1.5rem;
+  --shell-sidebar-width:    clamp(10rem, 14vw, 13rem);
 }
 
 

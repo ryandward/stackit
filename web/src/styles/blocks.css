@@ -11,7 +11,7 @@
   align-items: center;
   padding-inline: var(--space-block);
   background: var(--bg-app);
-  border-bottom: 1px solid var(--border-subtle);
+  border-bottom: var(--border-width) solid var(--border-subtle);
   gap: var(--space-block);
 }
 
@@ -26,8 +26,8 @@
 }
 
 .topbar__brand svg {
-  width: 16px;
-  height: 16px;
+  width: 1em;
+  height: 1em;
 }
 
 .topbar__crumbs {
@@ -50,8 +50,8 @@
 }
 
 .topbar__crumb__sep {
-  width: 12px;
-  height: 12px;
+  width: 1em;
+  height: 1em;
   color: var(--border);
 }
 
@@ -60,7 +60,7 @@
 
 .sidebar {
   background: var(--bg-subtle);
-  border-right: 1px solid var(--border-subtle);
+  border-right: var(--border-width) solid var(--border-subtle);
   padding-block: var(--space-block);
   overflow-y: auto;
   display: flex;
@@ -87,26 +87,35 @@
   display: flex;
   align-items: center;
   gap: var(--space-element);
-  padding-block: 6px;
-  padding-inline: var(--space-block);
-  font-size: var(--text-fine-size);
-  letter-spacing: var(--text-fine-track);
+  padding-block: var(--space-inline);
+  padding-inline-start: var(--space-section);
+  padding-inline-end: var(--space-block);
+  font-size: var(--text-body-size);
+  letter-spacing: var(--text-body-track);
   color: var(--fg-muted);
   cursor: pointer;
   user-select: none;
+  transform: scale(1);
+  will-change: transform;
   transition: background var(--duration) var(--ease),
-              color var(--duration) var(--ease);
+              color var(--duration) var(--ease),
+              transform var(--duration-spring) var(--ease-overshoot);
 }
 
 .sidebar__link svg {
-  width: 14px;
-  height: 14px;
+  width: 1em;
+  height: 1em;
   flex-shrink: 0;
 }
 
 .sidebar__link:hover {
   background: var(--bg-hover);
   color: var(--fg);
+}
+
+.sidebar__link:active {
+  transform: scale(var(--scale-pressed));
+  transition: transform var(--duration-fast) var(--ease);
 }
 
 
@@ -118,7 +127,7 @@
   justify-content: space-between;
   padding-inline: var(--space-block);
   background: var(--bg-subtle);
-  border-top: 1px solid var(--border-subtle);
+  border-top: var(--border-width) solid var(--border-subtle);
   font-family: var(--font-mono);
   font-size: var(--text-micro-size);
   color: var(--fg-muted);
@@ -174,7 +183,7 @@
   letter-spacing: var(--text-fine-track);
   color: var(--fg);
   background: var(--bg-element);
-  border: 1px solid var(--border-subtle);
+  border: var(--border-width) solid var(--border-subtle);
   border-radius: var(--radius);
   cursor: pointer;
   transition: background var(--duration) var(--ease),
@@ -187,14 +196,12 @@
 }
 
 .button svg {
-  width: 14px;
-  height: 14px;
+  width: 1em;
+  height: 1em;
 }
 
 .button--icon {
-  padding: 6px;
-  width: 30px;
-  height: 30px;
+  padding: var(--space-element);
 }
 
 
@@ -202,7 +209,7 @@
 
 .card {
   background: var(--bg-subtle);
-  border: 1px solid var(--border-subtle);
+  border: var(--border-width) solid var(--border-subtle);
   border-radius: var(--radius);
   padding: var(--space-block);
 }
@@ -218,9 +225,10 @@
 }
 
 
-/* Ledger (Sharing-style data table) */
+/* Tables. Shared grammar for .ledger (Sharing) and .files. */
 
-.ledger {
+.ledger,
+.files {
   width: 100%;
   border-collapse: collapse;
   font-size: var(--text-fine-size);
@@ -228,7 +236,8 @@
   letter-spacing: var(--text-fine-track);
 }
 
-.ledger thead th {
+.ledger thead th,
+.files thead th {
   text-align: left;
   padding: var(--space-element) var(--space-inline);
   font-size: var(--text-micro-size);
@@ -236,22 +245,26 @@
   text-transform: uppercase;
   font-weight: var(--weight-medium);
   color: var(--fg-muted);
-  border-bottom: 1px solid var(--border-subtle);
+  border-bottom: var(--border-width) solid var(--border-subtle);
 }
 
-.ledger tbody td {
-  padding: var(--space-inline);
-  border-bottom: 1px solid var(--border-subtle);
+.ledger tbody td,
+.files tbody td {
+  padding: var(--space-tight) var(--space-inline);
+  border-bottom: var(--border-width) solid var(--border-subtle);
   color: var(--fg);
   vertical-align: middle;
 }
 
-.ledger tbody tr {
-  transition: background var(--duration) var(--ease);
+.ledger tbody tr,
+.files tbody tr {
+  transition: background var(--duration-spring) var(--ease-spring);
 }
 
-.ledger tbody tr:hover {
+.ledger tbody tr:hover,
+.files tbody tr:hover {
   background: var(--bg-hover);
+  transition: background var(--duration-instant);
 }
 
 .ledger__token {
@@ -289,8 +302,8 @@
 
 .ledger__dot {
   display: inline-block;
-  width: 6px;
-  height: 6px;
+  width: var(--space-element);
+  height: var(--space-element);
   border-radius: 50%;
   background: var(--border);
   flex-shrink: 0;
@@ -302,7 +315,7 @@
 .affiliations {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: var(--space-nano);
 }
 
 .affiliation {
@@ -321,37 +334,7 @@
 }
 
 
-/* Files list (file-manager style) */
-
-.files {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: var(--text-fine-size);
-  line-height: var(--text-fine-leading);
-  letter-spacing: var(--text-fine-track);
-}
-
-.files thead th {
-  text-align: left;
-  padding: var(--space-element) var(--space-inline);
-  font-size: var(--text-micro-size);
-  letter-spacing: var(--text-micro-track);
-  text-transform: uppercase;
-  font-weight: var(--weight-medium);
-  color: var(--fg-muted);
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.files tbody td {
-  padding: var(--space-inline);
-  border-bottom: 1px solid var(--border-subtle);
-  color: var(--fg);
-  vertical-align: middle;
-}
-
-.files tbody tr:hover {
-  background: var(--bg-hover);
-}
+/* Files cell modifiers. Table structure is shared with .ledger above. */
 
 .files__name {
   display: inline-flex;
@@ -362,8 +345,8 @@
 }
 
 .files__name svg {
-  width: 14px;
-  height: 14px;
+  width: 1em;
+  height: 1em;
   color: var(--fg-muted);
   flex-shrink: 0;
 }
@@ -379,11 +362,10 @@
 
 .dropdown__content {
   background: var(--bg-subtle);
-  border: 1px solid var(--border-subtle);
+  border: var(--border-width) solid var(--border-subtle);
   border-radius: var(--radius);
   box-shadow: var(--shadow-floating);
   padding: var(--space-tight);
-  min-width: 180px;
   z-index: var(--z-overlay);
 }
 
@@ -391,7 +373,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-inline);
-  padding: 6px var(--space-inline);
+  padding: var(--space-element) var(--space-inline);
   font-size: var(--text-fine-size);
   letter-spacing: var(--text-fine-track);
   color: var(--fg);
@@ -402,8 +384,8 @@
 }
 
 .dropdown__item svg {
-  width: 14px;
-  height: 14px;
+  width: 1em;
+  height: 1em;
   color: var(--fg-muted);
 }
 
