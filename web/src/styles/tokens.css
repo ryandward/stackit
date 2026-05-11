@@ -86,12 +86,19 @@
   --brand-dark-12: #e2deff;
 
   /* Status. GitHub Primer, vetted for both modes. */
-  --status-success-light: #1a7f37;
-  --status-success-dark:  #3fb950;
-  --status-warning-light: #9a6700;
-  --status-warning-dark:  #d29922;
-  --status-danger-light:  #cf222e;
-  --status-danger-dark:   #f85149;
+  --status-success-light:      #1a7f37;
+  --status-success-dark:       #3fb950;
+  --status-warning-light:      #9a6700;
+  --status-warning-dark:       #d29922;
+  --status-danger-light:       #cf222e;
+  --status-danger-dark:        #f85149;
+  --status-danger-hover-light: #a40e26;
+  --status-danger-hover-dark:  #da3633;
+
+  /* Universals. Pure white and pure black, named so theme blocks
+     don't have to inline them. */
+  --white: #ffffff;
+  --black: #000000;
 
 
   /*
@@ -209,12 +216,12 @@
   --accent-solid:       var(--brand-9);
   --accent-solid-hover: var(--brand-10);
   --accent-text:        var(--brand-11);
-  --on-accent:          #ffffff;
+  --on-accent:          var(--white);
 
   --success:       var(--status-success-light);
   --warning:       var(--status-warning-light);
   --danger:        var(--status-danger-light);
-  --danger-hover:  #a40e26;
+  --danger-hover:  var(--status-danger-hover-light);
 
   --shadow-floating:
     0 1px 1px   rgba(0, 0, 0, 0.04),
@@ -247,12 +254,12 @@
   --accent-solid:       var(--brand-dark-9);
   --accent-solid-hover: var(--brand-dark-10);
   --accent-text:        var(--brand-dark-11);
-  --on-accent:          #ffffff;
+  --on-accent:          var(--white);
 
   --success:       var(--status-success-dark);
   --warning:       var(--status-warning-dark);
   --danger:        var(--status-danger-dark);
-  --danger-hover:  #da3633;
+  --danger-hover:  var(--status-danger-hover-dark);
 
   --shadow-floating:
     0 1px 1px   rgba(0, 0, 0, 0.40),
@@ -266,7 +273,7 @@
 /* Theme: Midnight. Pure black floor, slate-dark above. */
 
 :root[data-theme="midnight"] {
-  --bg-app:        #000000;
+  --bg-app:        var(--black);
   --bg-subtle:     var(--slate-dark-1);
   --bg-element:    var(--slate-dark-2);
   --bg-hover:      var(--slate-dark-3);
@@ -277,7 +284,7 @@
   --border-hover:  var(--slate-dark-8);
 
   --fg-muted:      var(--slate-dark-11);
-  --fg:            #ffffff;
+  --fg:            var(--white);
 
   --accent-bg:          var(--brand-dark-3);
   --accent-bg-hover:    var(--brand-dark-4);
@@ -285,12 +292,12 @@
   --accent-solid:       var(--brand-dark-9);
   --accent-solid-hover: var(--brand-dark-10);
   --accent-text:        var(--brand-dark-11);
-  --on-accent:          #ffffff;
+  --on-accent:          var(--white);
 
   --success:       var(--status-success-dark);
   --warning:       var(--status-warning-dark);
   --danger:        var(--status-danger-dark);
-  --danger-hover:  #da3633;
+  --danger-hover:  var(--status-danger-hover-dark);
 
   --shadow-floating:
     0 1px 1px   rgba(0, 0, 0, 0.60),

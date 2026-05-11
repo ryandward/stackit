@@ -48,20 +48,21 @@ const spaceTokens = [
 const SAMPLE = 'The quick brown fox jumps over the lazy dog'
 
 function useResolvedTokens(names: readonly string[]): Record<string, string> {
-  const [resolved, setResolved] = useState<Record<string, string>>({})
+  // Bump on theme change so the read below recomputes. We don't cache
+  // resolved values in state; reading via getComputedStyle is cheap
+  // and a synchronous read during render is robust to HMR adding /
+  // removing tokens behind our back.
+  const [, setTick] = useState(0)
   useEffect(() => {
-    const read = () => {
-      const styles = getComputedStyle(document.documentElement)
-      const next: Record<string, string> = {}
-      for (const name of names) next[name] = styles.getPropertyValue(name).trim()
-      setResolved(next)
-    }
-    read()
-    const obs = new MutationObserver(read)
+    const obs = new MutationObserver(() => setTick(t => t + 1))
     obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
     return () => obs.disconnect()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  if (typeof window === 'undefined') return {}
+  const styles = getComputedStyle(document.documentElement)
+  const resolved: Record<string, string> = {}
+  for (const name of names) resolved[name] = styles.getPropertyValue(name).trim()
   return resolved
 }
 
