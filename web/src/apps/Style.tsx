@@ -27,6 +27,7 @@ const colorTokens: ColorToken[] = [
   { name: '--success-hover',      group: 'status' },
   { name: '--warning',            group: 'status' },
   { name: '--warning-hover',      group: 'status' },
+  { name: '--on-warning',         group: 'status' },
   { name: '--danger',             group: 'status' },
   { name: '--danger-hover',       group: 'status' },
 ]

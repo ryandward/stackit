@@ -90,10 +90,15 @@
   --status-success-dark:        #3fb950;
   --status-success-hover-light: #166429;
   --status-success-hover-dark:  #2da444;
-  --status-warning-light:       #9a6700;
-  --status-warning-dark:        #d29922;
-  --status-warning-hover-light: #7d5300;
-  --status-warning-hover-dark:  #b88419;
+
+  /* Warning is amber (Radix amber-9 / amber-10). Per Radix's bright-
+     scale rule, yellow/amber/lime/sky/mint use the same hex in both
+     modes and pair with near-black text. White-on-amber fails APCA
+     contrast (Lc -29, catastrophic). One value across all themes. */
+  --status-warning:             #ffc53d;
+  --status-warning-hover:       #ffba18;
+  --status-warning-text:        #21201c;
+
   --status-danger-light:        #cf222e;
   --status-danger-dark:         #f85149;
   --status-danger-hover-light:  #a40e26;
@@ -232,8 +237,9 @@
 
   --success:       var(--status-success-light);
   --success-hover: var(--status-success-hover-light);
-  --warning:       var(--status-warning-light);
-  --warning-hover: var(--status-warning-hover-light);
+  --warning:       var(--status-warning);
+  --warning-hover: var(--status-warning-hover);
+  --on-warning:    var(--status-warning-text);
   --danger:        var(--status-danger-light);
   --danger-hover:  var(--status-danger-hover-light);
 
@@ -273,8 +279,9 @@
 
   --success:       var(--status-success-dark);
   --success-hover: var(--status-success-hover-dark);
-  --warning:       var(--status-warning-dark);
-  --warning-hover: var(--status-warning-hover-dark);
+  --warning:       var(--status-warning);
+  --warning-hover: var(--status-warning-hover);
+  --on-warning:    var(--status-warning-text);
   --danger:        var(--status-danger-dark);
   --danger-hover:  var(--status-danger-hover-dark);
 
@@ -314,8 +321,9 @@
 
   --success:       var(--status-success-dark);
   --success-hover: var(--status-success-hover-dark);
-  --warning:       var(--status-warning-dark);
-  --warning-hover: var(--status-warning-hover-dark);
+  --warning:       var(--status-warning);
+  --warning-hover: var(--status-warning-hover);
+  --on-warning:    var(--status-warning-text);
   --danger:        var(--status-danger-dark);
   --danger-hover:  var(--status-danger-hover-dark);
 

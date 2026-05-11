@@ -54,7 +54,7 @@
 
 .button[data-variant="warning"] {
   background: var(--warning);
-  color: var(--on-accent);
+  color: var(--on-warning);
   border-color: var(--warning);
 }
 
