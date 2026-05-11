@@ -42,14 +42,14 @@
 }
 
 .button[data-variant="destructive"] {
-  background: var(--destructive);
+  background: var(--danger);
   color: var(--on-accent);
-  border-color: var(--destructive);
+  border-color: var(--danger);
 }
 
 .button[data-variant="destructive"]:hover {
-  background: var(--destructive-hover);
-  border-color: var(--destructive-hover);
+  background: var(--danger-hover);
+  border-color: var(--danger-hover);
 }
 
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Settings } from 'lucide-react'
 
-type ColorGroup = 'surface' | 'border' | 'foreground' | 'brand' | 'destructive' | 'status'
+type ColorGroup = 'surface' | 'border' | 'foreground' | 'brand' | 'status'
 
 type ColorToken = { name: string; group: ColorGroup }
 
@@ -23,11 +23,10 @@ const colorTokens: ColorToken[] = [
   { name: '--accent-solid-hover', group: 'brand' },
   { name: '--accent-text',        group: 'brand' },
   { name: '--on-accent',          group: 'brand' },
-  { name: '--destructive',        group: 'destructive' },
-  { name: '--destructive-hover',  group: 'destructive' },
   { name: '--success',            group: 'status' },
   { name: '--warning',            group: 'status' },
   { name: '--danger',             group: 'status' },
+  { name: '--danger-hover',       group: 'status' },
 ]
 
 const typeStyles = [

@@ -211,15 +211,10 @@
   --accent-text:        var(--brand-11);
   --on-accent:          #ffffff;
 
-  --success: var(--status-success-light);
-  --warning: var(--status-warning-light);
-  --danger:  var(--status-danger-light);
-
-  /* Destructive: an action intent, not a state. Used on Delete/Remove
-     buttons. Visually red, but tokenised separately from --danger so
-     the two roles can diverge without refactor. */
-  --destructive:       #cf222e;
-  --destructive-hover: #a40e26;
+  --success:       var(--status-success-light);
+  --warning:       var(--status-warning-light);
+  --danger:        var(--status-danger-light);
+  --danger-hover:  #a40e26;
 
   --shadow-floating:
     0 1px 1px   rgba(0, 0, 0, 0.04),
@@ -254,12 +249,10 @@
   --accent-text:        var(--brand-dark-11);
   --on-accent:          #ffffff;
 
-  --success: var(--status-success-dark);
-  --warning: var(--status-warning-dark);
-  --danger:  var(--status-danger-dark);
-
-  --destructive:       #f85149;
-  --destructive-hover: #da3633;
+  --success:       var(--status-success-dark);
+  --warning:       var(--status-warning-dark);
+  --danger:        var(--status-danger-dark);
+  --danger-hover:  #da3633;
 
   --shadow-floating:
     0 1px 1px   rgba(0, 0, 0, 0.40),
@@ -294,12 +287,10 @@
   --accent-text:        var(--brand-dark-11);
   --on-accent:          #ffffff;
 
-  --success: var(--status-success-dark);
-  --warning: var(--status-warning-dark);
-  --danger:  var(--status-danger-dark);
-
-  --destructive:       #f85149;
-  --destructive-hover: #da3633;
+  --success:       var(--status-success-dark);
+  --warning:       var(--status-warning-dark);
+  --danger:        var(--status-danger-dark);
+  --danger-hover:  #da3633;
 
   --shadow-floating:
     0 1px 1px   rgba(0, 0, 0, 0.60),
