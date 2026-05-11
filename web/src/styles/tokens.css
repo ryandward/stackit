@@ -200,7 +200,7 @@
    * cramped displays surrender it; the cap prevents over-claim on
    * ultra-wide where the ideal would balloon past the chrome's role.
    */
-  --shell-topbar-height:    2.5rem;
+  --shell-topbar-height:    4rem;
   --shell-statusbar-height: 1.5rem;
   --shell-sidebar-width:    clamp(10rem, 14vw, 13rem);
 }

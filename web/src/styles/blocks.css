@@ -20,21 +20,24 @@
 }
 
 
-/* Wordmark (brand mark in topbar) */
+/* Wordmark (brand mark in topbar). Icon is sized larger than the
+   text so the four wells inside the rhombus stay legible at glance
+   distance; this is the brand mark's reading size, not a derivation
+   of the wordmark text. */
 
 .wordmark {
   display: flex;
   align-items: center;
-  gap: var(--space-element);
-  font-size: var(--text-body-size);
+  gap: var(--space-inline);
+  font-size: var(--text-heading-size);
   font-weight: var(--weight-medium);
   letter-spacing: var(--text-heading-track);
   color: var(--fg);
 }
 
 .wordmark svg {
-  width: 1em;
-  height: 1em;
+  width: 2rem;
+  height: 2rem;
 }
 
 
