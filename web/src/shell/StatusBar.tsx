@@ -2,7 +2,7 @@ import { Lock } from 'lucide-react'
 
 export function StatusBar() {
   return (
-    <footer className="statusbar text-system">
+    <footer className="statusbar">
       <div data-status="active">
         <span className="dot" />
         <span>connected</span>

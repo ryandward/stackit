@@ -125,11 +125,13 @@
 
 
 /*
- * Status Bar. The system's voice at the bottom of the shell. Layout
- * and chrome only here — typography (mono, size, leading, default
- * colour) comes from the .text-system utility applied at the element.
- * Direct children are segments; segments are separated by a hairline
- * left border (skipped on the first).
+ * Status Bar. Perimeter chrome at the bottom of the shell, matching
+ * the topbar and sidebar in font family (sans) and scale (fine /
+ * 13px). Direct children are segments; segments are separated by a
+ * hairline inline-start border (skipped on the first). The content
+ * inside is narrative, not code, so it doesn't speak in mono. The
+ * one exception is <kbd>, which renders a literal keypress and
+ * inherits mono from the element-styles layer.
  */
 
 .statusbar {
@@ -138,6 +140,10 @@
   background: var(--bg-subtle);
   border-top: var(--border-width) solid var(--border-subtle);
   height: var(--shell-statusbar-height);
+  font-size: var(--text-fine-size);
+  line-height: 1;
+  letter-spacing: var(--text-fine-track);
+  color: var(--fg-muted);
 }
 
 .statusbar > * {
