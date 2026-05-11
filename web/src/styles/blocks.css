@@ -289,6 +289,24 @@
 }
 
 
+/*
+ * Theme frame. A panel that renders its contents in a scoped theme
+ * by setting bg-app + fg from the locally-overridden tokens. Used by
+ * the Style storyboard to show all themes side-by-side.
+ */
+
+.theme-frame {
+  background: var(--bg-app);
+  color: var(--fg);
+  padding: var(--space-block);
+  border-radius: var(--radius);
+  border: var(--border-width) solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-block);
+}
+
+
 /* Swatch. A coloured sample tile, ~24x24. Used wherever a literal
    colour value needs to be shown (Style storyboard, future palette
    pickers). */

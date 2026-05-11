@@ -199,8 +199,16 @@
 
 /* Theme: Light. Radix step semantics over Slate light. */
 
+/*
+ * Theme blocks. Each rule applies to the document root via :root or
+ * to any descendant via [data-theme="..."]. The second selector
+ * enables nested theming, used by the Style storyboard to show all
+ * three themes side-by-side without flipping the page theme.
+ */
+
 :root,
-:root[data-theme="light"] {
+:root[data-theme="light"],
+[data-theme="light"] {
   --bg-app:        var(--slate-1);
   --bg-subtle:     var(--slate-2);
   --bg-element:    var(--slate-3);
@@ -240,7 +248,8 @@
 
 /* Theme: Dark. Radix step semantics over Slate dark. */
 
-:root[data-theme="dark"] {
+:root[data-theme="dark"],
+[data-theme="dark"] {
   --bg-app:        var(--slate-dark-1);
   --bg-subtle:     var(--slate-dark-2);
   --bg-element:    var(--slate-dark-3);
@@ -280,7 +289,8 @@
 
 /* Theme: Midnight. Pure black floor, slate-dark above. */
 
-:root[data-theme="midnight"] {
+:root[data-theme="midnight"],
+[data-theme="midnight"] {
   --bg-app:        var(--black);
   --bg-subtle:     var(--slate-dark-1);
   --bg-element:    var(--slate-dark-2);

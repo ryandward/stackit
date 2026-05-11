@@ -178,6 +178,36 @@ export function Style() {
         ))}
       </div>
 
+      <h2>Themes</h2>
+      <div className="theme-grid">
+        {(['light', 'dark', 'midnight'] as const).map(t => (
+          <div key={t} data-theme={t} className="theme-frame">
+            <span className="text-status">{t}</span>
+            <div className="cluster">
+              <button className="button">Default</button>
+              <button className="button" data-variant="primary">Primary</button>
+              <button className="button" data-variant="success">Success</button>
+              <button className="button" data-variant="warning">Warning</button>
+              <button className="button" data-variant="destructive">Destructive</button>
+              <button className="button" data-variant="ghost">Ghost</button>
+            </div>
+            <div className="cluster">
+              {(['active', 'expiring', 'revoked'] as const).map(s => (
+                <span key={s} data-status={s} className="cluster">
+                  <span className="dot" />
+                  <span className="text-status">{s}</span>
+                </span>
+              ))}
+            </div>
+            <div>
+              <span className="fg">Primary text on this theme</span>
+              <br />
+              <span className="fg-muted">Muted text on this theme</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
       <h2>Code</h2>
       <p>
         Inline code appears as <code>:AFFILIATED_WITH</code> in prose, picked

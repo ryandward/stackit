@@ -69,3 +69,12 @@
   align-items: center;
   gap: var(--space-element);
 }
+
+
+/* Theme grid: three columns at desktop, stacks below. */
+
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: var(--space-block);
+}
