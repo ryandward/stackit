@@ -24,7 +24,9 @@ const colorTokens: ColorToken[] = [
   { name: '--accent-text',        group: 'brand' },
   { name: '--on-accent',          group: 'brand' },
   { name: '--success',            group: 'status' },
+  { name: '--success-hover',      group: 'status' },
   { name: '--warning',            group: 'status' },
+  { name: '--warning-hover',      group: 'status' },
   { name: '--danger',             group: 'status' },
   { name: '--danger-hover',       group: 'status' },
 ]
@@ -159,6 +161,8 @@ export function Style() {
       <div className="cluster">
         <button className="button">Default</button>
         <button className="button" data-variant="primary">Primary</button>
+        <button className="button" data-variant="success">Success</button>
+        <button className="button" data-variant="warning">Warning</button>
         <button className="button" data-variant="destructive">Destructive</button>
         <button className="button" data-variant="ghost">Ghost</button>
         <button className="button button--icon" aria-label="Settings"><Settings /></button>

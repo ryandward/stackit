@@ -86,14 +86,18 @@
   --brand-dark-12: #e2deff;
 
   /* Status. GitHub Primer, vetted for both modes. */
-  --status-success-light:      #1a7f37;
-  --status-success-dark:       #3fb950;
-  --status-warning-light:      #9a6700;
-  --status-warning-dark:       #d29922;
-  --status-danger-light:       #cf222e;
-  --status-danger-dark:        #f85149;
-  --status-danger-hover-light: #a40e26;
-  --status-danger-hover-dark:  #da3633;
+  --status-success-light:       #1a7f37;
+  --status-success-dark:        #3fb950;
+  --status-success-hover-light: #166429;
+  --status-success-hover-dark:  #2da444;
+  --status-warning-light:       #9a6700;
+  --status-warning-dark:        #d29922;
+  --status-warning-hover-light: #7d5300;
+  --status-warning-hover-dark:  #b88419;
+  --status-danger-light:        #cf222e;
+  --status-danger-dark:         #f85149;
+  --status-danger-hover-light:  #a40e26;
+  --status-danger-hover-dark:   #da3633;
 
   /* Universals. Pure white and pure black, named so theme blocks
      don't have to inline them. */
@@ -219,7 +223,9 @@
   --on-accent:          var(--white);
 
   --success:       var(--status-success-light);
+  --success-hover: var(--status-success-hover-light);
   --warning:       var(--status-warning-light);
+  --warning-hover: var(--status-warning-hover-light);
   --danger:        var(--status-danger-light);
   --danger-hover:  var(--status-danger-hover-light);
 
@@ -257,7 +263,9 @@
   --on-accent:          var(--white);
 
   --success:       var(--status-success-dark);
+  --success-hover: var(--status-success-hover-dark);
   --warning:       var(--status-warning-dark);
+  --warning-hover: var(--status-warning-hover-dark);
   --danger:        var(--status-danger-dark);
   --danger-hover:  var(--status-danger-hover-dark);
 
@@ -295,7 +303,9 @@
   --on-accent:          var(--white);
 
   --success:       var(--status-success-dark);
+  --success-hover: var(--status-success-hover-dark);
   --warning:       var(--status-warning-dark);
+  --warning-hover: var(--status-warning-hover-dark);
   --danger:        var(--status-danger-dark);
   --danger-hover:  var(--status-danger-hover-dark);
 

@@ -41,6 +41,28 @@
   border-color: transparent;
 }
 
+.button[data-variant="success"] {
+  background: var(--success);
+  color: var(--on-accent);
+  border-color: var(--success);
+}
+
+.button[data-variant="success"]:hover {
+  background: var(--success-hover);
+  border-color: var(--success-hover);
+}
+
+.button[data-variant="warning"] {
+  background: var(--warning);
+  color: var(--on-accent);
+  border-color: var(--warning);
+}
+
+.button[data-variant="warning"]:hover {
+  background: var(--warning-hover);
+  border-color: var(--warning-hover);
+}
+
 .button[data-variant="destructive"] {
   background: var(--danger);
   color: var(--on-accent);
