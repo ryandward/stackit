@@ -59,3 +59,18 @@
   max-width: 60ch;
   margin-block-end: var(--space-section);
 }
+
+/* System-telemetry voice. Machine-emitted readouts: status bar
+   segments, console lines, deploy progress strips. Mono so the
+   chrome reads as "the system is reporting," tight leading because
+   every line is a discrete signal not body text, default muted
+   because it's persistent ambient information that promotes to fg
+   only on the value that matters. */
+
+.text-system {
+  font-family: var(--font-mono);
+  font-size: var(--text-fine-size);
+  line-height: 1;
+  letter-spacing: 0;
+  color: var(--fg-muted);
+}

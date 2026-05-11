@@ -1,27 +1,21 @@
+import { Lock } from 'lucide-react'
+
 export function StatusBar() {
   return (
-    <footer className="statusbar">
+    <footer className="statusbar text-system">
       <div data-status="active">
         <span className="dot" />
         <span>connected</span>
       </div>
       <div>
-        <span>tenant</span>
-        <span className="fg">demo</span>
+        <Lock />
+        <span>encrypted</span>
       </div>
       <div>
-        <span>graph</span>
-        <span className="fg">tenant_demo_graph</span>
+        <span>last sync</span>
+        <span className="fg">2m ago</span>
       </div>
       <div className="push-end">
-        <span>postgres</span>
-        <span className="fg">:54322</span>
-      </div>
-      <div>
-        <span>api</span>
-        <span className="fg">:3000</span>
-      </div>
-      <div>
         <kbd>⌘K</kbd>
         <span>palette</span>
       </div>

@@ -125,10 +125,11 @@
 
 
 /*
- * Status Bar. IDE-style live operational state at the bottom of the
- * shell. Direct children are segments; segments are separated by a
- * hairline left border (skipped on the first). Inside each segment,
- * the cascade picks up gaps and centering.
+ * Status Bar. The system's voice at the bottom of the shell. Layout
+ * and chrome only here — typography (mono, size, leading, default
+ * colour) comes from the .text-system utility applied at the element.
+ * Direct children are segments; segments are separated by a hairline
+ * left border (skipped on the first).
  */
 
 .statusbar {
@@ -136,9 +137,6 @@
   align-items: stretch;
   background: var(--bg-subtle);
   border-top: var(--border-width) solid var(--border-subtle);
-  font-family: var(--font-mono);
-  font-size: var(--text-micro-size);
-  color: var(--fg-muted);
   height: var(--shell-statusbar-height);
 }
 
@@ -154,10 +152,9 @@
   border-inline-start: var(--border-width) solid var(--border-subtle);
 }
 
-.statusbar kbd {
-  font-family: var(--font-mono);
-  font-size: var(--text-micro-size);
-  color: var(--fg-muted);
+.statusbar svg {
+  width: 1em;
+  height: 1em;
 }
 
 
