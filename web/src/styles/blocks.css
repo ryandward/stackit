@@ -8,15 +8,30 @@
  */
 
 
-/* Top Bar */
+/*
+ * Top Bar. Same column structure as .shell-body (sidebar-width +
+ * 1fr) so the visual columns of the page align across the two grid
+ * containers. First cell holds the identity cluster over the
+ * sidebar; second cell holds the navigation + controls over the
+ * pane. Inner padding on the second cell matches .pane's own padding
+ * so breadcrumbs land at the same x as the pane heading.
+ */
 
 .topbar {
-  display: flex;
+  display: grid;
+  grid-template-columns: var(--shell-sidebar-width) 1fr;
   align-items: center;
-  padding-inline: var(--space-block);
   background: var(--bg-app);
   border-bottom: var(--border-width) solid var(--border-subtle);
-  gap: var(--space-block);
+  height: var(--shell-topbar-height);
+}
+
+.topbar > :first-child {
+  padding-inline: var(--space-block);
+}
+
+.topbar > :last-child {
+  padding-inline: var(--space-section);
 }
 
 
@@ -44,11 +59,9 @@
 /* Breadcrumbs */
 
 .crumbs {
-  flex: 1;
   display: flex;
   align-items: center;
   gap: var(--space-element);
-  margin-inline-start: var(--space-block);
   font-size: var(--text-fine-size);
   letter-spacing: var(--text-fine-track);
   color: var(--fg-muted);

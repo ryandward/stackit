@@ -17,15 +17,17 @@ export function TopBar({ crumbs }: { crumbs: string[] }) {
         </div>
         <span className="tenant-tag">demo</span>
       </div>
-      <nav className="crumbs" aria-label="Breadcrumb">
-        {crumbs.map((c, i) => (
-          <span key={`${i}-${c}`} className="crumb">
-            {i > 0 && <ChevronRight />}
-            <span>{c}</span>
-          </span>
-        ))}
-      </nav>
-      <ThemeSwitcher />
+      <div className="spread">
+        <nav className="crumbs" aria-label="Breadcrumb">
+          {crumbs.map((c, i) => (
+            <span key={`${i}-${c}`} className="crumb">
+              {i > 0 && <ChevronRight />}
+              <span>{c}</span>
+            </span>
+          ))}
+        </nav>
+        <ThemeSwitcher />
+      </div>
     </header>
   )
 }
