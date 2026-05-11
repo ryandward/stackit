@@ -105,6 +105,11 @@
   color: var(--fg-muted);
   cursor: pointer;
   user-select: none;
+  transform: scale(1);
+  will-change: transform;
+  transition: background var(--duration-base) var(--ease),
+              color      var(--duration-base) var(--ease),
+              transform  var(--duration-spring) var(--ease-overshoot);
 }
 
 .nav-link svg {
@@ -162,6 +167,11 @@
   border: var(--border-width) solid var(--border-subtle);
   border-radius: var(--radius);
   cursor: pointer;
+  transform: scale(1);
+  will-change: transform;
+  transition: background   var(--duration-base) var(--ease),
+              border-color var(--duration-base) var(--ease),
+              transform    var(--duration-spring) var(--ease-overshoot);
 }
 
 .button:hover {
@@ -283,6 +293,25 @@
   cursor: pointer;
   outline: none;
   user-select: none;
+  transform: scale(1);
+  will-change: transform;
+  transition: transform var(--duration-spring) var(--ease-overshoot);
+}
+
+
+/*
+ * Tappable press response. Cross-component click feedback.
+ * Press: fast linear snap to scale-pressed.
+ * Release: spring back through each block's own transition, which
+ *          carries transform under the overshoot ease.
+ * Excludes data-table rows; the hover layer composite there shifts
+ * subpixel text rendering.
+ */
+.button:active,
+.nav-link:active,
+.menu-item:active {
+  transform: scale(var(--scale-pressed));
+  transition: transform var(--duration-fast) var(--ease);
 }
 
 .menu-item svg {
