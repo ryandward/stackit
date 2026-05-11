@@ -41,6 +41,17 @@
   border-color: transparent;
 }
 
+.button[data-variant="destructive"] {
+  background: var(--destructive);
+  color: var(--on-accent);
+  border-color: var(--destructive);
+}
+
+.button[data-variant="destructive"]:hover {
+  background: var(--destructive-hover);
+  border-color: var(--destructive-hover);
+}
+
 
 /* Menu item highlighted (Radix sets this) */
 

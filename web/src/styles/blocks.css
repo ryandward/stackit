@@ -150,6 +150,25 @@
   margin-block-end: var(--space-element);
 }
 
+.pane h2 {
+  font-size: var(--text-micro-size);
+  letter-spacing: var(--text-micro-track);
+  text-transform: uppercase;
+  font-weight: var(--weight-medium);
+  color: var(--fg-muted);
+  margin-block-start: var(--space-section);
+  margin-block-end: var(--space-block);
+}
+
+.pane h3 {
+  font-size: var(--text-fine-size);
+  letter-spacing: var(--text-fine-track);
+  font-weight: var(--weight-medium);
+  color: var(--fg);
+  margin-block-start: var(--space-block);
+  margin-block-end: var(--space-element);
+}
+
 
 /* Button */
 
@@ -270,52 +289,9 @@
 }
 
 
-/*
- * Style storyboard. Internal layout primitives for the Style app.
- */
-
-.style-section {
-  margin-block-end: var(--space-section);
-}
-
-.style-section h2 {
-  font-size: var(--text-micro-size);
-  letter-spacing: var(--text-micro-track);
-  text-transform: uppercase;
-  font-weight: var(--weight-medium);
-  color: var(--fg-muted);
-  margin-block-end: var(--space-block);
-}
-
-.style-group {
-  margin-block-end: var(--space-block);
-}
-
-.style-group-label {
-  font-size: var(--text-micro-size);
-  letter-spacing: var(--text-micro-track);
-  text-transform: uppercase;
-  color: var(--fg-muted);
-  padding-block: var(--space-element);
-  border-bottom: var(--border-width) solid var(--border-subtle);
-}
-
-.style-row {
-  display: flex;
-  align-items: center;
-  gap: var(--space-block);
-  padding-block: var(--space-inline);
-  border-bottom: var(--border-width) solid var(--border-subtle);
-}
-
-.style-label {
-  width: 140px;
-  flex-shrink: 0;
-  font-size: var(--text-micro-size);
-  letter-spacing: var(--text-micro-track);
-  text-transform: uppercase;
-  color: var(--fg-muted);
-}
+/* Swatch. A coloured sample tile, ~24x24. Used wherever a literal
+   colour value needs to be shown (Style storyboard, future palette
+   pickers). */
 
 .swatch {
   display: inline-block;
@@ -324,6 +300,19 @@
   border-radius: var(--radius);
   border: var(--border-width) solid var(--border-subtle);
   flex-shrink: 0;
+  vertical-align: middle;
+}
+
+
+/* Bar. A coloured rectangle whose width represents a measurement
+   (spacing scale visualisation). Height set by the consumer. */
+
+.bar {
+  display: inline-block;
+  height: var(--space-tight);
+  background: var(--accent-solid);
+  border-radius: var(--radius);
+  vertical-align: middle;
 }
 
 
