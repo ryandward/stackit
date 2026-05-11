@@ -1,8 +1,8 @@
 export function View() {
   return (
     <div className="pane">
-      <h1 className="pane__title">View</h1>
-      <p className="pane__intro">
+      <h1>View</h1>
+      <p className="lead">
         Cross-filter and heatmap viewer. Spectacle compiles a SourceExpr to SQL,
         ClickHouse executes, the canvas renders.
       </p>

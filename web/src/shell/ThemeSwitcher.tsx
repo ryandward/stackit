@@ -17,16 +17,16 @@ export function ThemeSwitcher() {
         <Current />
       </DropdownMenu.Trigger>
       <DropdownMenu.Portal>
-        <DropdownMenu.Content className="dropdown__content" sideOffset={6} align="end">
+        <DropdownMenu.Content className="menu" sideOffset={6} align="end">
           {themes.map(({ id, label, Icon }) => (
             <DropdownMenu.Item
               key={id}
-              className="dropdown__item"
+              className="menu-item"
               onSelect={() => setTheme(id)}
             >
               <Icon />
               <span>{label}</span>
-              {theme === id && <Check className="dropdown__item__check" />}
+              {theme === id && <Check className="push-end fg-solid" />}
             </DropdownMenu.Item>
           ))}
         </DropdownMenu.Content>

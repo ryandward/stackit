@@ -1,13 +1,61 @@
 /*
- * Utilities. Single-purpose intent appliers.
+ * Utilities. Single-purpose and named-intent appliers.
  * Reference intent aliases only. No [data-*].
  */
 
+
+/* Single-purpose */
+
 .text-mono     { font-family: var(--font-mono); }
 .text-sans     { font-family: var(--font-sans); }
+.text-fine     { font-size: var(--text-fine-size); letter-spacing: var(--text-fine-track); }
+.text-right    { text-align: right; }
+.text-nowrap   { white-space: nowrap; }
+
+.weight-medium { font-weight: var(--weight-medium); }
 
 .fg            { color: var(--fg); }
 .fg-muted      { color: var(--fg-muted); }
 .fg-accent     { color: var(--accent-text); }
+.fg-solid      { color: var(--accent-solid); }
 
 .tabular-nums  { font-variant-numeric: tabular-nums; }
+
+.push-end      { margin-inline-start: auto; }
+
+
+/* Named-intent composites. Each one is a recognisable content role
+   (a promoted cell, a number column, a status label). Apply at the
+   element that holds that role's content. */
+
+.text-primary {
+  color: var(--fg);
+  font-weight: var(--weight-medium);
+}
+
+.text-num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.text-time {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.text-status {
+  font-size: var(--text-micro-size);
+  letter-spacing: var(--text-micro-track);
+  text-transform: uppercase;
+  font-weight: var(--weight-medium);
+  white-space: nowrap;
+}
+
+.lead {
+  color: var(--fg-muted);
+  max-width: 60ch;
+  margin-block-end: var(--space-section);
+}

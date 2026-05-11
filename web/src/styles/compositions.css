@@ -17,14 +17,14 @@
   overflow: hidden;
 }
 
-.shell__body {
+.shell-body {
   display: grid;
   grid-template-columns: var(--shell-sidebar-width) 1fr;
   overflow: hidden;
   min-height: 0;
 }
 
-.shell__pane {
+.shell-pane {
   overflow: auto;
   min-height: 0;
 }

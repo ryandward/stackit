@@ -1,8 +1,8 @@
 export function Lineage() {
   return (
     <div className="pane">
-      <h1 className="pane__title">Lineage</h1>
-      <p className="pane__intro">
+      <h1>Lineage</h1>
+      <p className="lead">
         Provenance tree for a selected file. The <code>derived_from</code> chain back to source.
       </p>
       <div className="card">

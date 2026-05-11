@@ -1,12 +1,12 @@
 export function StatusBar() {
   return (
     <footer className="statusbar">
-      <div className="statusbar__items">
-        <span>tenant <span className="statusbar__strong">demo</span></span>
+      <div className="cluster">
+        <span>tenant <span className="fg">demo</span></span>
         <span>·</span>
-        <span>graph <span className="statusbar__strong">tenant_demo_graph</span></span>
+        <span>graph <span className="fg">tenant_demo_graph</span></span>
       </div>
-      <div className="statusbar__items">
+      <div className="cluster">
         <span>postgres :54322</span>
         <span>·</span>
         <span>last sync 2m ago</span>

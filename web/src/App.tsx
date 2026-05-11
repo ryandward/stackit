@@ -36,9 +36,9 @@ export function App() {
     <ThemeProvider>
       <div className="shell">
         <TopBar crumbs={['Home', TITLES[active]]} />
-        <div className="shell__body">
+        <div className="shell-body">
           <SideBar activeApp={active} onSelectApp={setActive} />
-          <main className="shell__pane">
+          <main className="shell-pane">
             <Pane />
           </main>
         </div>

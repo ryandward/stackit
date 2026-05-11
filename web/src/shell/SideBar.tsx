@@ -47,12 +47,12 @@ export function SideBar({ activeApp, onSelectApp }: Props) {
   return (
     <nav className="sidebar">
       {groups.map(g => (
-        <div key={g.label} className="sidebar__group">
-          <div className="sidebar__label">{g.label}</div>
+        <div key={g.label} className="nav-group">
+          <div className="nav-label">{g.label}</div>
           {g.items.map(({ id, name, Icon, app }) => (
             <a
               key={id}
-              className="sidebar__link"
+              className="nav-link"
               data-active={app != null && activeApp === app ? 'true' : undefined}
               onClick={() => app && onSelectApp(app)}
             >

@@ -1,9 +1,9 @@
 export function Graph() {
   return (
     <div className="pane">
-      <h1 className="pane__title">Graph</h1>
-      <p className="pane__intro">
-        Force-directed view of an entity's neighborhood in the metadata 2-category.
+      <h1>Graph</h1>
+      <p className="lead">
+        Force-directed view of an entity's neighborhood in the metadata property graph.
         Wire to AGE next.
       </p>
       <div className="card">

@@ -1,6 +1,10 @@
 /*
  * Blocks. Component-scoped styles.
- * Reference intent aliases only. No raw values.
+ *
+ * Each block is a self-contained component named for what it IS,
+ * not for the parent that holds it. No `__` element separators.
+ * Inner styling rides the cascade (.block svg, .block tbody td)
+ * or is composed via utility classes at the call site.
  */
 
 
@@ -15,7 +19,10 @@
   gap: var(--space-block);
 }
 
-.topbar__brand {
+
+/* Wordmark (brand mark in topbar) */
+
+.wordmark {
   display: flex;
   align-items: center;
   gap: var(--space-element);
@@ -25,12 +32,15 @@
   color: var(--fg);
 }
 
-.topbar__brand svg {
+.wordmark svg {
   width: 1em;
   height: 1em;
 }
 
-.topbar__crumbs {
+
+/* Breadcrumbs */
+
+.crumbs {
   flex: 1;
   display: flex;
   align-items: center;
@@ -42,14 +52,14 @@
   min-width: 0;
 }
 
-.topbar__crumb {
+.crumb {
   display: inline-flex;
   align-items: center;
   gap: var(--space-tight);
   white-space: nowrap;
 }
 
-.topbar__crumb__sep {
+.crumb svg {
   width: 1em;
   height: 1em;
   color: var(--border);
@@ -67,13 +77,13 @@
   flex-direction: column;
 }
 
-.sidebar__group {
+.nav-group {
   display: flex;
   flex-direction: column;
   padding-block-end: var(--space-block);
 }
 
-.sidebar__label {
+.nav-label {
   padding-inline: var(--space-block);
   padding-block: var(--space-element);
   font-size: var(--text-micro-size);
@@ -83,7 +93,7 @@
   color: var(--fg-muted);
 }
 
-.sidebar__link {
+.nav-link {
   display: flex;
   align-items: center;
   gap: var(--space-element);
@@ -95,37 +105,17 @@
   color: var(--fg-muted);
   cursor: pointer;
   user-select: none;
-  transform: scale(1);
-  will-change: transform;
-  transition: background var(--duration-base) var(--ease),
-              color var(--duration-base) var(--ease),
-              transform var(--duration-spring) var(--ease-overshoot);
 }
 
-.sidebar__link svg {
+.nav-link svg {
   width: 1em;
   height: 1em;
   flex-shrink: 0;
 }
 
-.sidebar__link:hover {
+.nav-link:hover {
   background: var(--bg-hover);
   color: var(--fg);
-}
-
-/*
- * Tappable press response. Cross-component click feedback.
- * Press: fast linear snap to scale-pressed.
- * Release: spring back through each block's default transition,
- *          which carries transform under the overshoot ease.
- */
-.sidebar__link:active,
-.button:active,
-.dropdown__item:active,
-.ledger tbody tr:active,
-.files tbody tr:active {
-  transform: scale(var(--scale-pressed));
-  transition: transform var(--duration-fast) var(--ease);
 }
 
 
@@ -143,16 +133,6 @@
   color: var(--fg-muted);
 }
 
-.statusbar__items {
-  display: flex;
-  align-items: center;
-  gap: var(--space-block);
-}
-
-.statusbar__strong {
-  color: var(--fg);
-}
-
 
 /* Pane (main content area) */
 
@@ -161,22 +141,8 @@
   max-width: 1100px;
 }
 
-.pane__title {
-  font-size: var(--text-heading-size);
-  line-height: var(--text-heading-leading);
-  letter-spacing: var(--text-heading-track);
-  font-weight: var(--weight-medium);
-  color: var(--fg);
+.pane h1 {
   margin-block-end: var(--space-element);
-}
-
-.pane__intro {
-  font-size: var(--text-body-size);
-  line-height: var(--text-body-leading);
-  letter-spacing: var(--text-body-track);
-  color: var(--fg-muted);
-  max-width: 60ch;
-  margin-block-end: var(--space-section);
 }
 
 
@@ -196,11 +162,6 @@
   border: var(--border-width) solid var(--border-subtle);
   border-radius: var(--radius);
   cursor: pointer;
-  transform: scale(1);
-  will-change: transform;
-  transition: background var(--duration-base) var(--ease),
-              border-color var(--duration-base) var(--ease),
-              transform var(--duration-spring) var(--ease-overshoot);
 }
 
 .button:hover {
@@ -238,21 +199,24 @@
 }
 
 
-/* Tables. Shared grammar for .ledger (Sharing) and .files. */
+/*
+ * Data table. One block, shared by Files / Sharing / Members.
+ * Default cell colour is fg-muted; cells promote to fg via the
+ * .text-primary utility. Numeric / time / status columns use the
+ * matching composite utilities. No table-specific cell classes.
+ */
 
-.ledger,
-.files {
+.data-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: var(--text-fine-size);
-  line-height: var(--text-fine-leading);
-  letter-spacing: var(--text-fine-track);
+  font-size: var(--text-body-size);
+  line-height: var(--text-body-leading);
+  letter-spacing: var(--text-body-track);
 }
 
-.ledger thead th,
-.files thead th {
+.data-table thead th {
   text-align: left;
-  padding: var(--space-element) var(--space-inline);
+  padding: var(--space-element) var(--space-block);
   font-size: var(--text-micro-size);
   letter-spacing: var(--text-micro-track);
   text-transform: uppercase;
@@ -261,125 +225,44 @@
   border-bottom: var(--border-width) solid var(--border-subtle);
 }
 
-.ledger tbody td,
-.files tbody td {
-  padding: var(--space-tight) var(--space-inline);
+.data-table tbody td {
+  padding-block: var(--space-inline);
+  padding-inline: var(--space-block);
   border-bottom: var(--border-width) solid var(--border-subtle);
-  color: var(--fg);
+  color: var(--fg-muted);
   vertical-align: middle;
 }
 
-.ledger tbody tr,
-.files tbody tr {
-  transform: scale(1);
-  transition: background var(--duration-spring) var(--ease-spring),
-              transform  var(--duration-spring) var(--ease-overshoot);
-}
-
-.ledger tbody tr:hover,
-.ledger tbody tr:focus-visible,
-.files tbody tr:hover,
-.files tbody tr:focus-visible {
+.data-table tbody tr:hover {
   background: var(--bg-hover);
-  will-change: transform;
-  transition: background var(--duration-instant),
-              transform  var(--duration-spring) var(--ease-overshoot);
 }
 
-.ledger__token {
-  font-family: var(--font-mono);
-  color: var(--fg);
-}
-
-.ledger__time {
-  font-family: var(--font-mono);
+.data-table td:first-child {
+  padding-inline-end: 0;
   color: var(--fg-muted);
-  font-variant-numeric: tabular-nums;
 }
 
-.ledger__opened {
-  color: var(--fg);
+.data-table td:first-child svg {
+  width: 1em;
+  height: 1em;
 }
 
-.ledger__opened__count {
-  font-family: var(--font-mono);
-  color: var(--fg-muted);
-  font-variant-numeric: tabular-nums;
-}
 
-.ledger__status {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-element);
-  font-size: var(--text-micro-size);
-  letter-spacing: var(--text-micro-track);
-  text-transform: uppercase;
-  font-weight: var(--weight-medium);
-  color: var(--fg-muted);
-  white-space: nowrap;
-}
+/* Status dot. Tiny block, single job. Colour set by data-status exception. */
 
-.ledger__dot {
+.dot {
   display: inline-block;
   width: var(--space-element);
   height: var(--space-element);
   border-radius: 50%;
   background: var(--border);
-  flex-shrink: 0;
+  vertical-align: middle;
 }
 
 
-/* Affiliations (rendered inside a Members row) */
+/* Menu (Radix DropdownMenu surface) */
 
-.affiliations {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-nano);
-}
-
-.affiliation {
-  font-size: var(--text-fine-size);
-  letter-spacing: var(--text-fine-track);
-  white-space: nowrap;
-}
-
-.affiliation__name {
-  color: var(--fg);
-}
-
-.affiliation__qualifiers {
-  color: var(--fg-muted);
-  font-variant-numeric: tabular-nums;
-}
-
-
-/* Files cell modifiers. Table structure is shared with .ledger above. */
-
-.files__name {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-element);
-  color: var(--fg);
-  font-family: var(--font-mono);
-}
-
-.files__name svg {
-  width: 1em;
-  height: 1em;
-  color: var(--fg-muted);
-  flex-shrink: 0;
-}
-
-.files__num {
-  font-family: var(--font-mono);
-  color: var(--fg-muted);
-  font-variant-numeric: tabular-nums;
-}
-
-
-/* Dropdown (Radix DropdownMenu) */
-
-.dropdown__content {
+.menu {
   background: var(--bg-subtle);
   border: var(--border-width) solid var(--border-subtle);
   border-radius: var(--radius);
@@ -388,7 +271,7 @@
   z-index: var(--z-overlay);
 }
 
-.dropdown__item {
+.menu-item {
   display: flex;
   align-items: center;
   gap: var(--space-inline);
@@ -400,18 +283,10 @@
   cursor: pointer;
   outline: none;
   user-select: none;
-  transform: scale(1);
-  will-change: transform;
-  transition: transform var(--duration-spring) var(--ease-overshoot);
 }
 
-.dropdown__item svg {
+.menu-item svg {
   width: 1em;
   height: 1em;
   color: var(--fg-muted);
-}
-
-.dropdown__item__check {
-  margin-inline-start: auto;
-  color: var(--accent-solid) !important;
 }

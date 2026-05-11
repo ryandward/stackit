@@ -13,13 +13,20 @@ const rows = [
 export function Files() {
   return (
     <div className="pane">
-      <h1 className="pane__title">Files</h1>
-      <p className="pane__intro">
+      <h1>Files</h1>
+      <p className="lead">
         Files in the demo tenant. Stub data. Wires to the server's files endpoint after schema lands.
       </p>
-      <table className="files">
+      <table className="data-table">
+        <colgroup>
+          <col style={{ width: '28px' }} />
+          <col />
+          <col style={{ width: '120px' }} />
+          <col style={{ width: '180px' }} />
+        </colgroup>
         <thead>
           <tr>
+            <th></th>
             <th>Name</th>
             <th>Size</th>
             <th>Modified</th>
@@ -28,14 +35,10 @@ export function Files() {
         <tbody>
           {rows.map(r => (
             <tr key={r.name}>
-              <td>
-                <span className="files__name">
-                  {r.kind === 'folder' ? <Folder /> : <File />}
-                  <span>{r.name}</span>
-                </span>
-              </td>
-              <td className="files__num">{r.size}</td>
-              <td>{r.modified}</td>
+              <td>{r.kind === 'folder' ? <Folder /> : <File />}</td>
+              <td><span className="text-primary text-mono">{r.name}</span></td>
+              <td className="text-num">{r.size}</td>
+              <td className="text-nowrap">{r.modified}</td>
             </tr>
           ))}
         </tbody>
