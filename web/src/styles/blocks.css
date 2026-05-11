@@ -58,12 +58,15 @@
 
 /* Breadcrumbs */
 
+/* Breadcrumbs. Structure and chrome colour only; typography (size,
+   tracking, family) inherits from body. Same register as .nav-link
+   in the sidebar — both are chrome navigation and read at the body
+   scale stop by inheritance, not by parallel declaration. */
+
 .crumbs {
   display: flex;
   align-items: center;
   gap: var(--space-element);
-  font-size: var(--text-fine-size);
-  letter-spacing: var(--text-fine-track);
   color: var(--fg-muted);
   min-width: 0;
 }
@@ -109,6 +112,11 @@
   color: var(--fg-muted);
 }
 
+/* Nav link. Structure, chrome colour, and interaction only;
+   typography inherits from body. Same register as .crumbs in the
+   topbar — both are chrome navigation reading at the body scale
+   stop by cascade. */
+
 .nav-link {
   display: flex;
   align-items: center;
@@ -116,8 +124,6 @@
   padding-block: var(--space-inline);
   padding-inline-start: var(--space-section);
   padding-inline-end: var(--space-block);
-  font-size: var(--text-body-size);
-  letter-spacing: var(--text-body-track);
   color: var(--fg-muted);
   cursor: pointer;
   user-select: none;
