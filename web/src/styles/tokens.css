@@ -113,6 +113,13 @@
   --white: #ffffff;
   --black: #000000;
 
+  /* Brand mark wells. The canonical placeholder logo uses #6B5BFA
+     for the rhombus and #c4b5fd for the four wells inside it.
+     #c4b5fd is a brand-asset choice, not a derived stop on the brand
+     ramp, so it gets its own named token (used only by the wordmark
+     SVG, not by any theme intent alias). */
+  --brand-wells: #c4b5fd;
+
 
   /*
    * Type. Geist Variable.
