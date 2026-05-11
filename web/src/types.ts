@@ -5,6 +5,7 @@ export type AppId =
   | 'sharing'
   | 'view'
   | 'members'
+  | 'style'
 
 export type InstitutionKind =
   | 'university'

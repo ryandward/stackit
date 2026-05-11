@@ -9,6 +9,7 @@ import { Lineage } from './apps/Lineage'
 import { Sharing } from './apps/Sharing'
 import { View } from './apps/View'
 import { Members } from './apps/Members'
+import { Style } from './apps/Style'
 import type { AppId } from './types'
 
 const APPS = {
@@ -18,6 +19,7 @@ const APPS = {
   sharing: Sharing,
   view:    View,
   members: Members,
+  style:   Style,
 } as const
 
 const TITLES: Record<AppId, string> = {
@@ -27,6 +29,7 @@ const TITLES: Record<AppId, string> = {
   sharing: 'Sharing',
   view:    'View',
   members: 'Members',
+  style:   'Style',
 }
 
 export function App() {

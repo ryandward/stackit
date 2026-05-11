@@ -1,7 +1,7 @@
 import {
   File, Database, FlaskConical, BookText, Link as LinkIcon,
   FolderOpen, GitBranch, Workflow, Share2, BarChart3,
-  Users, Settings,
+  Users, Settings, Palette,
 } from 'lucide-react'
 import type { AppId } from '../types'
 
@@ -34,6 +34,12 @@ const groups: Group[] = [
     items: [
       { id: 't-members',  name: 'Members',  Icon: Users,    app: 'members' },
       { id: 't-settings', name: 'Settings', Icon: Settings },
+    ],
+  },
+  {
+    label: 'Design',
+    items: [
+      { id: 'd-style', name: 'Style', Icon: Palette, app: 'style' },
     ],
   },
 ]
