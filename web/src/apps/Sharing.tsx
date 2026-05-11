@@ -56,7 +56,7 @@ export function Sharing() {
                 ) : null}
               </td>
               <td className="text-time">{l.created}</td>
-              <td className="text-status text-right">{l.status}</td>
+              <td className="text-status">{l.status}</td>
             </tr>
           ))}
         </tbody>

@@ -134,7 +134,7 @@ export function Style() {
                 <tr key={t.name}>
                   <td><span className="swatch" style={{ background: `var(${t.name})` }} /></td>
                   <td><span className="text-primary text-mono">{t.name}</span></td>
-                  <td className="text-mono text-right">{resolved[t.name] ?? ''}</td>
+                  <td className="text-mono">{resolved[t.name] ?? ''}</td>
                 </tr>
               ))}
             </tbody>
