@@ -86,10 +86,14 @@
   --brand-dark-12: #e2deff;
 
   /* Status. GitHub Primer, vetted for both modes. */
-  --status-success-light:       #1a7f37;
-  --status-success-dark:        #3fb950;
-  --status-success-hover-light: #166429;
-  --status-success-hover-dark:  #2da444;
+  /* Success is Radix grass (grass-9 / grass-10). Step-9 is the same
+     hex in both modes (the Radix solid-bg convention); hover splits
+     light/dark. Previous Primer-style #1a7f37 was so darkened for
+     white-text contrast that it read as moss / olive rather than as
+     a vibrant success green. */
+  --status-success:             #46a758;
+  --status-success-hover-light: #3e9b4f;
+  --status-success-hover-dark:  #53b365;
 
   /* Warning is amber (Radix amber-9 / amber-10). Per Radix's bright-
      scale rule, yellow/amber/lime/sky/mint use the same hex in both
@@ -235,7 +239,7 @@
   --accent-text:        var(--brand-11);
   --on-accent:          var(--white);
 
-  --success:       var(--status-success-light);
+  --success:       var(--status-success);
   --success-hover: var(--status-success-hover-light);
   --warning:       var(--status-warning);
   --warning-hover: var(--status-warning-hover);
@@ -277,7 +281,7 @@
   --accent-text:        var(--brand-dark-11);
   --on-accent:          var(--white);
 
-  --success:       var(--status-success-dark);
+  --success:       var(--status-success);
   --success-hover: var(--status-success-hover-dark);
   --warning:       var(--status-warning);
   --warning-hover: var(--status-warning-hover);
@@ -319,7 +323,7 @@
   --accent-text:        var(--brand-dark-11);
   --on-accent:          var(--white);
 
-  --success:       var(--status-success-dark);
+  --success:       var(--status-success);
   --success-hover: var(--status-success-hover-dark);
   --warning:       var(--status-warning);
   --warning-hover: var(--status-warning-hover);
