@@ -124,15 +124,37 @@
 }
 
 
-/* Status Bar */
+/*
+ * Status Bar. IDE-style live operational state at the bottom of the
+ * shell. Direct children are segments; segments are separated by a
+ * hairline left border (skipped on the first). Inside each segment,
+ * the cascade picks up gaps and centering.
+ */
 
 .statusbar {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-inline: var(--space-block);
+  align-items: stretch;
   background: var(--bg-subtle);
   border-top: var(--border-width) solid var(--border-subtle);
+  font-family: var(--font-mono);
+  font-size: var(--text-micro-size);
+  color: var(--fg-muted);
+  height: var(--shell-statusbar-height);
+}
+
+.statusbar > * {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-element);
+  padding-inline: var(--space-inline);
+  white-space: nowrap;
+}
+
+.statusbar > * + * {
+  border-inline-start: var(--border-width) solid var(--border-subtle);
+}
+
+.statusbar kbd {
   font-family: var(--font-mono);
   font-size: var(--text-micro-size);
   color: var(--fg-muted);
