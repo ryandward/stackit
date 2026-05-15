@@ -7,6 +7,12 @@ export function InviteGate({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     setHasToken(getInviteToken() !== null)
+    const onCleared = () => {
+      setHasToken(false)
+      setInput('')
+    }
+    window.addEventListener('stackit:invite-cleared', onCleared)
+    return () => window.removeEventListener('stackit:invite-cleared', onCleared)
   }, [])
 
   if (hasToken === null) return null

@@ -28,6 +28,9 @@ export function clearInviteToken(): void {
   } catch {
     /* ignore */
   }
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new Event('stackit:invite-cleared'))
+  }
 }
 
 async function request<T>(
