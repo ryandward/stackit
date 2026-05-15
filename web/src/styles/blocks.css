@@ -481,3 +481,9 @@
 .invite-gate input:focus-visible {
   border-color: var(--accent-border);
 }
+
+.invite-gate__error {
+  color: var(--danger);
+  font-size: var(--text-fine-size);
+  margin: 0;
+}

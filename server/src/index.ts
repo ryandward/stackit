@@ -34,6 +34,10 @@ app.addHook('onRequest', async (req, reply) => {
 
 app.get('/health', async () => ({ status: 'ok' }))
 
+// Behind the invite-token hook by design. The SPA hits this on the
+// invite-gate submit to verify the token before storing it.
+app.get('/verify', async () => ({ status: 'ok' }))
+
 app.post<{ Body: { slug: string; displayName?: string } }>(
   '/tenants',
   async (req) => {
