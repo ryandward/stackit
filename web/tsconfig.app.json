@@ -1,5 +1,4 @@
 {
-  "extends": "../tsconfig.base.json",
   "compilerOptions": {
     "target": "ES2022",
     "useDefineForClassFields": true,
@@ -10,6 +9,9 @@
     "verbatimModuleSyntax": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
     "isolatedModules": true,
     "moduleDetection": "force",
     "strict": true,

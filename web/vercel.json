@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "https://api.stackit.bio/$1"
+      "destination": "https://server-production-25c5.up.railway.app/$1"
     }
   ]
 }

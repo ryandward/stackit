@@ -57,21 +57,33 @@ async function seed() {
     await cypher(client, graph, `MERGE (:User {id: $uid})`, { uid: userId })
     await cypher(client, graph, `MERGE (:Institution {id: $iid})`, { iid: instId })
 
-    await cypher(
+    // AGE does not support MERGE...ON CREATE SET on edges. Check-then-create
+    // gives idempotency without that clause.
+    const counts = await cypher<{ c: number }>(
       client,
       graph,
-      `MATCH (u:User {id: $uid}), (i:Institution {id: $iid})
-       MERGE (u)-[a:AFFILIATED_WITH]->(i)
-       ON CREATE SET
-         a.role       = $role,
-         a.start_year = $start_year`,
-      {
-        uid: userId,
-        iid: instId,
-        role: 'PhD candidate',
-        start_year: 2018,
-      },
+      `MATCH (u:User {id: $uid})-[:AFFILIATED_WITH]->(i:Institution {id: $iid})
+       RETURN count(*) AS c`,
+      { uid: userId, iid: instId },
     )
+    const hasEdge = (counts[0]?.c ?? 0) > 0
+    if (!hasEdge) {
+      await cypher(
+        client,
+        graph,
+        `MATCH (u:User {id: $uid}), (i:Institution {id: $iid})
+         CREATE (u)-[:AFFILIATED_WITH {
+           role:       $role,
+           start_year: $start_year
+         }]->(i)`,
+        {
+          uid: userId,
+          iid: instId,
+          role: 'PhD candidate',
+          start_year: 2018,
+        },
+      )
+    }
 
     console.log(`seeded user ${userId} affiliated with institution ${instId}`)
   })

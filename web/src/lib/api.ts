@@ -40,11 +40,10 @@ async function request<T>(
   if (token) headers['X-Invite-Token'] = token
   if (body !== undefined) headers['Content-Type'] = 'application/json'
 
-  const r = await fetch(`/api${path}`, {
-    method,
-    headers,
-    body: body !== undefined ? JSON.stringify(body) : undefined,
-  })
+  const init: RequestInit = { method, headers }
+  if (body !== undefined) init.body = JSON.stringify(body)
+
+  const r = await fetch(`/api${path}`, init)
 
   if (r.status === 401) {
     clearInviteToken()
