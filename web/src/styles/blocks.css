@@ -430,3 +430,54 @@
   height: 1em;
   color: var(--fg-muted);
 }
+
+
+/* Invite gate. Pre-app splash for token entry. */
+
+.invite-gate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 100vh;
+  background: var(--bg-app);
+  color: var(--fg);
+  padding: var(--space-section);
+}
+
+.invite-gate form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-block);
+  max-inline-size: 22rem;
+  inline-size: 100%;
+}
+
+.invite-gate h1 {
+  font-size: var(--text-heading-size);
+  letter-spacing: var(--text-heading-track);
+  font-weight: var(--weight-medium);
+  margin: 0;
+}
+
+.invite-gate p {
+  font-size: var(--text-fine-size);
+  color: var(--fg-muted);
+  margin: 0;
+}
+
+.invite-gate input {
+  font-family: var(--font-mono);
+  font-size: var(--text-body-size);
+  letter-spacing: var(--text-body-track);
+  padding: var(--space-element) var(--space-inline);
+  background: var(--bg-subtle);
+  color: var(--fg);
+  border: var(--border-width) solid var(--border);
+  border-radius: var(--radius);
+  outline: none;
+  transition: border-color var(--duration-base) var(--ease);
+}
+
+.invite-gate input:focus-visible {
+  border-color: var(--accent-border);
+}

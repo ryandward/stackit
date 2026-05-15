@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import type { Affiliation, Member } from '../types'
+import { api } from '../lib/api'
 
 const TENANT = 'demo'
 
@@ -9,11 +10,7 @@ export function Members() {
 
   useEffect(() => {
     let cancelled = false
-    fetch(`/api/tenants/${TENANT}/members`)
-      .then(r => {
-        if (!r.ok) throw new Error(`HTTP ${r.status}`)
-        return r.json() as Promise<Member[]>
-      })
+    api.get<Member[]>(`/tenants/${TENANT}/members`)
       .then(data => {
         if (!cancelled) setMembers(data)
       })

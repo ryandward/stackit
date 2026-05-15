@@ -1,4 +1,5 @@
 import Fastify from 'fastify'
+import cors from '@fastify/cors'
 import { withTenant } from './db.js'
 import { cypher } from './cypher.js'
 import { provisionTenant } from './tenants.js'
@@ -12,6 +13,24 @@ import {
 } from './entities.js'
 
 const app = Fastify({ logger: true })
+
+const corsOrigin = process.env.CORS_ORIGIN
+await app.register(cors, {
+  origin: corsOrigin ? corsOrigin.split(',').map(o => o.trim()) : true,
+  credentials: true,
+})
+
+// Invite-token gate. Skipped for /health (Railway probes) and CORS preflight.
+// When INVITE_TOKEN is unset the gate is disabled (local dev convenience).
+const inviteToken = process.env.INVITE_TOKEN
+app.addHook('onRequest', async (req, reply) => {
+  if (req.url === '/health' || req.method === 'OPTIONS') return
+  if (!inviteToken) return
+  const sent = req.headers['x-invite-token']
+  if (sent !== inviteToken) {
+    return reply.code(401).send({ error: 'invalid invite token' })
+  }
+})
 
 app.get('/health', async () => ({ status: 'ok' }))
 
